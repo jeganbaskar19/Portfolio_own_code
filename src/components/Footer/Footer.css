@@ -1,0 +1,104 @@
+.site-footer {
+  background: var(--ink);
+  border-top: 1px solid var(--line-on-ink);
+}
+
+.site-footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 3rem 0 2.2rem;
+}
+
+.site-footer__brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-on-ink);
+}
+
+.site-footer__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-faint-on-ink);
+  margin-top: 0.4rem;
+  max-width: 320px;
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted-on-ink);
+}
+
+.site-footer__nav a:hover {
+  color: var(--accent);
+}
+
+.site-footer__right {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.site-footer__top-btn {
+  background: transparent;
+  border: 1px solid var(--line-on-ink);
+  color: var(--text-muted-on-ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.55em 1.1em;
+  border-radius: 999px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-footer__top-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --- signature: terminal status bar --- */
+.statusbar {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.statusbar__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 0.5rem clamp(1.25rem, 5vw, 3rem);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.statusbar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.statusbar__item--grow {
+  flex: 1;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.statusbar__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .statusbar__item--grow {
+    display: none;
+  }
+}
