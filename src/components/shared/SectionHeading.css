@@ -1,0 +1,22 @@
+.heading {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  max-width: 640px;
+}
+
+.heading--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.heading__title {
+  font-size: var(--fs-h2);
+  margin-top: 0.7rem;
+}
+
+.heading__desc {
+  margin-top: 1rem;
+  font-size: 1.02rem;
+  opacity: 0.72;
+  line-height: 1.65;
+}
