@@ -1,0 +1,243 @@
+.experience__layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+/* --- left: company tabs --- */
+.experience__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  position: sticky;
+  top: 6.5rem;
+}
+
+.experience__tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--line-on-ink);
+  padding: 0.75rem 0 0.75rem 1.1rem;
+  color: var(--text-muted-on-ink);
+  transition: color 0.25s ease;
+}
+
+.experience__tab:hover {
+  color: var(--text-on-ink);
+}
+
+.experience__tab--active {
+  color: var(--text-on-ink);
+}
+
+.experience__tab-indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.experience__tab-company {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+}
+
+.experience__tab-role {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+
+.experience__tab-duration {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+/* --- right: active card --- */
+.experience__panel {
+  min-height: 320px;
+}
+
+.experience__card {
+  background: var(--ink-soft);
+  border: 1px solid var(--line-on-ink);
+  border-radius: var(--radius-md);
+  padding: clamp(1.3rem, 3vw, 1.9rem);
+}
+
+.experience__card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.experience__role-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.experience__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(224, 164, 88, 0.12);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.experience__role {
+  font-size: 1.2rem;
+  color: var(--text-on-ink);
+}
+
+.experience__company-line {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted-on-ink);
+  margin-top: 0.35rem;
+}
+
+.experience__dot-sep {
+  opacity: 0.5;
+}
+
+.experience__duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--accent);
+  border: 1px solid var(--line-on-ink);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.experience__pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--diff-add);
+  box-shadow: 0 0 0 0 rgba(111, 168, 111, 0.6);
+  animation: experience-pulse 1.8s infinite;
+}
+
+@keyframes experience-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(111, 168, 111, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(111, 168, 111, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(111, 168, 111, 0);
+  }
+}
+
+.experience__desc {
+  margin-top: 1.1rem;
+  color: var(--text-muted-on-ink);
+  line-height: 1.65;
+}
+
+.experience__list {
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.experience__list li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  color: var(--text-muted-on-ink);
+  line-height: 1.55;
+}
+
+.experience__diff {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.experience__diff--add {
+  color: var(--diff-add);
+}
+
+.experience__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.3rem;
+}
+
+.experience__tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted-on-ink);
+  border: 1px solid var(--line-on-ink);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience__pulse {
+    animation: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .experience__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .experience__tabs {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.6rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .experience__tab {
+    border-left: none;
+    border-bottom: 2px solid var(--line-on-ink);
+    padding: 0.4rem 0.2rem 0.7rem;
+    flex-shrink: 0;
+    min-width: 160px;
+  }
+
+  .experience__tab-indicator {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: -2px;
+    width: auto;
+    height: 2px;
+  }
+}
