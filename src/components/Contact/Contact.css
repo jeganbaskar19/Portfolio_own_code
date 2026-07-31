@@ -1,0 +1,110 @@
+.contact__grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact__info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-on-paper);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 1rem 1.2rem;
+  background: var(--paper-soft);
+  border: 1px solid var(--line-on-paper);
+  border-radius: var(--radius-sm);
+}
+
+.contact__info-row svg {
+  color: var(--accent-dim);
+  flex-shrink: 0;
+}
+
+.contact__availability {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted-on-paper);
+  margin-top: 0.6rem;
+}
+
+.contact__availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--diff-add);
+  box-shadow: 0 0 0 3px rgba(111, 168, 111, 0.18);
+  flex-shrink: 0;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+}
+
+.contact__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted-on-paper);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.contact__form input,
+.contact__form textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--paper-soft);
+  border: 1px solid var(--line-on-paper);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  color: var(--text-on-paper);
+  resize: vertical;
+}
+
+.contact__form input:focus,
+.contact__form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.contact__submit {
+  align-self: flex-start;
+  margin-top: 0.4rem;
+  border: none;
+}
+
+.contact__status {
+  font-size: 0.85rem;
+  color: var(--diff-add);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 860px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+}
