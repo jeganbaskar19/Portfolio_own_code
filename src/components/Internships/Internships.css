@@ -1,0 +1,67 @@
+.internships__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.internships__card {
+  background: var(--paper-soft);
+  border: 1px solid var(--line-on-paper);
+  border-radius: var(--radius-md);
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+  border-left: 3px solid var(--accent);
+}
+
+.internships__card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.internships__role {
+  font-size: 1.1rem;
+  color: var(--text-on-paper);
+}
+
+.internships__company {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted-on-paper);
+  margin-top: 0.3rem;
+}
+
+.internships__duration {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-dim);
+  border: 1px solid var(--line-on-paper);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.internships__desc {
+  margin-top: 1rem;
+  color: var(--text-muted-on-paper);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.internships__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+.internships__skill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-on-paper);
+  background: rgba(16, 21, 28, 0.06);
+  border: 1px solid var(--line-on-paper);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+}
