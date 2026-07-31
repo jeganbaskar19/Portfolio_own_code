@@ -1,0 +1,294 @@
+// ============================================================
+// MASTER DATA CONFIGURATION
+// Every string, number and list rendered on the site comes from
+// this file. Edit freely — no component contains hardcoded copy.
+// ============================================================
+
+export const personal = {
+  name: 'Jegan Baskar',
+  firstName: 'Jegan',
+  role: 'Associate Full Stack Developer',
+  roles: [
+    'Full Stack Developer',
+    'Ruby on Rails Developer',
+    'Java & Spring Boot Developer',
+    'React.js Developer'
+  ],
+  tagline: 'I fix what\'s broken and build what\'s missing — one clean commit at a time.',
+  greeting: "Hi, I'm",
+  shortDescription:
+    "Associate Full Stack Developer with hands-on experience across Ruby on Rails, JavaScript, Python, Java, Spring Boot and React.js. I diagnose and fix production bugs, build responsive screens end-to-end, and write internal tooling that makes teams faster — still early in my career, but I show up and figure things out.",
+  availability: {
+    status: 'available',
+    label: 'Open to new opportunities & Freelance Projects'
+  },
+  location: 'Coimbatore, Tamil Nadu, India',
+  resumeUrl: '/resume.pdf',
+  profileImage: '/profile.jpg',
+  quote: {
+    text: "Great software isn't written.\nIt's debugged, refined, and shipped.",
+    author: 'Jegan Baskar'
+  }
+};
+
+export const hero = {
+  eyebrow: 'Full Stack · Early Career, Fast Learner',
+  headline: personal.name,
+  subheadline: personal.role,
+  description: personal.shortDescription,
+  ctaPrimary: { label: 'Download Resume', href: personal.resumeUrl, type: 'resume' },
+  ctaSecondary: { label: 'Get in Touch', href: '#contact', type: 'scroll' },
+  stats: [
+    { id: 'experience', label: 'Months Experience', value: 8, suffix: '+' },
+    { id: 'projects', label: 'Projects Built', value: 3, suffix: '' },
+    { id: 'certifications', label: 'Certifications', value: 3, suffix: '' },
+    { id: 'companies', label: 'Companies Worked', value: 2, suffix: '' }
+  ]
+};
+
+export const about = {
+  eyebrow: 'About Me',
+  title: 'The person behind the pull requests',
+  intro:
+    "I'm an early-career full stack developer working across Ruby on Rails, JavaScript, Java and Spring Boot — currently focused on production bug fixes and new feature screens at a healthcare analytics company.",
+  story: [
+    "My day-to-day is spent inside a Ruby on Rails codebase, tracking down production bugs, updating controller logic to match changing business requirements, and handling the JavaScript-side validations and UI interactions that go with them. I've also built new application screens from scratch using JavaScript, HTML5 and CSS3 — with no one holding my hand through it.",
+    "Before this, I interned as a Java Full Stack Developer, where I built application modules with Spring Boot and React.js, designed MySQL schemas, and wired up REST APIs between frontend and backend. That's where I first got comfortable working across the whole stack instead of just one layer.",
+    "I'm still early in my career — 8 months of hands-on professional experience — and I'm upfront about that. What I bring is a fast learning curve, a habit of actually reading the error before guessing at a fix, and a track record of picking up production issues and getting them resolved."
+  ],
+  highlights: [
+    { id: 'h1', label: 'Current focus', value: 'Ruby on Rails + JavaScript' },
+    { id: 'h2', label: 'Also comfortable in', value: 'Java, Spring Boot, React.js' },
+    { id: 'h3', label: 'Database work', value: 'MySQL schema design & query optimisation' },
+    { id: 'h4', label: 'Working style', value: 'Debug first, then build' }
+  ],
+  technologies: {
+    frontend: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3'],
+    backend: ['Ruby on Rails', 'Java', 'Spring Boot', 'Python'],
+    database: ['MySQL', 'MongoDB', 'Relational Database Design', 'Query Optimisation'],
+    devops: ['Git', 'GitHub'],
+    cloud: [],
+    tools: ['Postman', 'VS Code', 'REST API Testing']
+  }
+};
+
+export const experience = {
+  eyebrow: 'Work Experience',
+  title: 'Where the work has happened',
+  items: [
+    {
+      id: 'exp-baltimore',
+      company: 'Baltimore Health Analytics',
+      logo: null,
+      role: 'Associate Full Stack Developer',
+      duration: 'Oct 2025 — Present',
+      location: 'Coimbatore, India',
+      description:
+        'Working across a Ruby on Rails backend and JavaScript frontend, fixing production bugs, updating business logic, and building new UI screens.',
+      responsibilities: [
+        'Diagnose and resolve production-level bugs across the Ruby on Rails backend and JavaScript frontend',
+        'Implement controller-level changes and update business logic in Rails to meet evolving requirements',
+        'Handle JavaScript frontend validations and dynamic UI interactions tied to those changes',
+        'Independently design and build new application screens using JavaScript, HTML5 and CSS3',
+        'Write Python scripts and internal tools to streamline team workflows',
+        'Integrate REST APIs between frontend and backend, with consistent error handling',
+        'Participate in sprint planning, daily standups and code reviews in an agile team'
+      ],
+      achievements: [],
+      technologies: ['Ruby on Rails', 'JavaScript', 'Python', 'HTML5', 'CSS3', 'REST APIs']
+    }
+  ]
+};
+
+export const internships = {
+  eyebrow: 'Internships',
+  title: 'Early hands-on experience',
+  items: [
+    {
+      id: 'int-1',
+      company: 'Xplore IT Corp',
+      logo: null,
+      role: 'Java Full Stack Developer Intern',
+      duration: 'Mar 2025 — Jul 2025',
+      certificateUrl: null,
+      description:
+        'Built and maintained full stack modules using Java, Spring Boot and React.js, designed MySQL schemas, and integrated REST APIs — my first real exposure to working the full stack in a team setting.',
+      skills: ['Java', 'Spring Boot', 'React.js', 'MySQL', 'HTML5', 'CSS3', 'JavaScript']
+    }
+  ]
+};
+
+export const academics = {
+  eyebrow: 'Academics',
+  title: 'Education timeline',
+  items: [
+    {
+      id: 'acad-1',
+      degree: 'B.E., Computer Science and Engineering',
+      college: 'Arjun College of Technology, Coimbatore',
+      duration: '2021 — 2025',
+      cgpa: '70%',
+      achievements: [],
+      subjects: ['Data Structures & Algorithms', 'Operating Systems', 'DBMS', 'Computer Networks'],
+      awards: []
+    }
+  ]
+};
+
+export const projects = {
+  eyebrow: 'Projects',
+  title: 'Things I have built',
+  filters: ['All', 'React', 'Spring Boot', 'Full Stack'],
+  items: [
+    {
+      id: 'proj-1',
+      title: 'Hotel Room Booking System',
+      image: null,
+      category: ['Spring Boot', 'Full Stack'],
+      description:
+        'A full-stack hotel booking application covering the complete booking lifecycle — room browsing, booking creation, cancellation, and real-time availability tracking.',
+      stack: ['Java', 'Spring Boot', 'React.js', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
+      features: [
+        'REST APIs for booking creation, cancellation and availability tracking',
+        'Real-time room status management',
+        'Responsive booking interface with optimised database queries'
+      ],
+      githubUrl: null,
+      liveUrl: null
+    },
+    {
+      id: 'proj-2',
+      title: 'My Task Manager Application',
+      image: null,
+      category: ['Spring Boot', 'Full Stack'],
+      description:
+        'A task management system with complete CRUD functionality — task creation, editing, status updates and completion tracking.',
+      stack: ['Java', 'Spring Boot', 'React.js', 'MySQL', 'HTML5', 'CSS3', 'JavaScript'],
+      features: [
+        'REST APIs for task creation, editing and status updates',
+        'Structured data flow between frontend and backend',
+        'Clean, responsive UI with optimised query performance'
+      ],
+      githubUrl: null,
+      liveUrl: null
+    },
+    {
+      id: 'proj-3',
+      title: 'This Portfolio',
+      image: null,
+      category: ['React', 'Full Stack'],
+      description:
+        'A from-scratch React + Vite portfolio, built with every section driven entirely by configuration files.',
+      stack: ['React', 'Vite', 'JavaScript'],
+      features: [
+        'Fully config-driven content — zero hardcoded copy in components',
+        'Light/dark theme system',
+        'Responsive layout across devices'
+      ],
+      githubUrl: null,
+      liveUrl: null
+    }
+  ]
+};
+
+export const certifications = {
+  eyebrow: 'Certifications',
+  title: 'Continuous learning',
+  items: [
+    { id: 'cert-1', title: 'Fundamentals of Generative AI', issuer: 'Microsoft', year: '2025', url: null },
+    { id: 'cert-2', title: 'AI Tools Workshop', issuer: 'BE10X', year: '2025', url: null },
+    { id: 'cert-3', title: 'Build Your Own Generative AI App', issuer: 'NxtWave', year: '2025', url: null }
+  ]
+};
+
+export const socials = [
+  { id: 'github', label: 'GitHub', icon: 'github', url: 'https://github.com/jeganbaskar19' },
+  { id: 'linkedin', label: 'LinkedIn', icon: 'linkedin', url: '#' },
+  { id: 'portfolio', label: 'Live Portfolio', icon: 'globe', url: 'https://skillvisualizer.netlify.app' }
+  // Add / remove entries freely. icon must be one of:
+  // 'github' | 'linkedin' | 'behance' | 'instagram' | 'twitter' | 'globe'
+  //
+  // Hovering a social icon shows a small preview card. GitHub's preview
+  // photo is pulled automatically (its avatar is public). Every other
+  // platform doesn't allow that without login, so it shows a styled
+  // placeholder by default — to use a real image instead, add:
+  //   previewImage: '/linkedin-preview.jpg'
+  // (drop that image into /public first). A LinkedIn profile screenshot,
+  // your Behance cover, etc. all work the same way.
+];
+
+export const contact = {
+  eyebrow: 'Contact',
+  title: "Let's build something reliable",
+  description:
+    "Whether it's a bug that needs fixing, a screen that needs building, or a small full-stack project — I'd like to hear about it.",
+  email: 'jeganbaskar19@gmail.com',
+  phone: '+91 78450 09566',
+  location: personal.location,
+  availability: personal.availability.label,
+  formLabels: {
+    name: 'Your Name',
+    email: 'Your Email',
+    subject: 'Subject',
+    message: 'Message',
+    submit: 'Send Message',
+    sending: 'Sending…',
+    success: 'Message sent — thank you! I will get back to you soon.',
+    error: 'Something went wrong. Please try again or email me directly.'
+  }
+};
+
+export const footer = {
+  logoText: personal.name,
+  copyright: `© ${new Date().getFullYear()} ${personal.name}. All rights reserved.`,
+  backToTopLabel: 'Back to top'
+};
+
+export const quotes = [
+  { id: 'q1', text: "Great software isn't written.\nIt's debugged, refined, and shipped.", author: 'Jegan Baskar' },
+  { id: 'q2', text: 'A clean diff is a form of respect for the next reader.', author: 'Jegan Baskar' }
+];
+
+export const seo = {
+  title: `${personal.name} — ${personal.role}`,
+  description: personal.shortDescription,
+  keywords: ['Full Stack Developer', 'Ruby on Rails', 'Java', 'Spring Boot', 'React.js', 'JavaScript'],
+  ogImage: '/og-cover.png'
+};
+
+export const animations = {
+  pageTransitionDuration: 0.6,
+  sectionRevealDuration: 0.8,
+  staggerChildren: 0.08,
+  counterDuration: 1.8,
+  reduceMotionRespected: true
+};
+
+export const navigation = [
+  { id: 'home', label: 'Home', href: '#home' },
+  { id: 'about', label: 'About', href: '#about' },
+  { id: 'experience', label: 'Experience', href: '#experience' },
+  { id: 'internships', label: 'Internships', href: '#internships' },
+  { id: 'academics', label: 'Academics', href: '#academics' },
+  { id: 'projects', label: 'Projects', href: '#projects' },
+  { id: 'certifications', label: 'Certifications', href: '#certifications' },
+  { id: 'contact', label: 'Contact', href: '#contact' }
+];
+
+export default {
+  personal,
+  hero,
+  about,
+  experience,
+  internships,
+  academics,
+  projects,
+  certifications,
+  socials,
+  contact,
+  footer,
+  quotes,
+  seo,
+  animations,
+  navigation
+};
