@@ -1,0 +1,36 @@
+.certifications__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.certifications__card {
+  background: var(--ink-soft);
+  border: 1px solid var(--line-on-ink);
+  border-radius: var(--radius-md);
+  padding: clamp(1.3rem, 3vw, 1.6rem);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.certifications__card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.certifications__icon {
+  color: var(--accent);
+}
+
+.certifications__title {
+  font-size: 1.02rem;
+  margin-top: 0.9rem;
+  color: var(--text-on-ink);
+  line-height: 1.4;
+}
+
+.certifications__meta {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted-on-ink);
+  margin-top: 0.6rem;
+}
