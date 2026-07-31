@@ -1,0 +1,226 @@
+/* ============================================================
+   DESIGN TOKENS
+   Every color/spacing value the site uses lives here.
+   Change a value once, it updates everywhere.
+   ============================================================ */
+
+:root {
+  /* --- Palette --- */
+  --ink: #10151c;
+  --ink-soft: #171e27;
+  --ink-raised: #1d2530;
+  --paper: #f6f1e7;
+  --paper-soft: #efe8d8;
+  --accent: #e0a458;
+  --accent-soft: #f1c88a;
+  --accent-dim: #8a6a3d;
+  --diff-add: #6fa86f;
+  --diff-del: #c1666b;
+
+  --text-on-ink: #f6f1e7;
+  --text-muted-on-ink: rgba(246, 241, 231, 0.62);
+  --text-faint-on-ink: rgba(246, 241, 231, 0.38);
+  --text-on-paper: #10151c;
+  --text-muted-on-paper: rgba(16, 21, 28, 0.62);
+  --text-faint-on-paper: rgba(16, 21, 28, 0.42);
+
+  --line-on-ink: rgba(246, 241, 231, 0.14);
+  --line-on-paper: rgba(16, 21, 28, 0.12);
+
+  /* --- Fonts (see src/config/fonts.js) --- */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* --- Type scale --- */
+  --fs-eyebrow: 0.78rem;
+  --fs-body: 1.05rem;
+  --fs-h1: clamp(2.6rem, 6vw, 4.6rem);
+  --fs-h2: clamp(2rem, 4.2vw, 3.1rem);
+  --fs-h3: clamp(1.3rem, 2.4vw, 1.7rem);
+
+  /* --- Layout --- */
+  --max-width: 1180px;
+  --section-pad: clamp(4rem, 9vw, 7.5rem);
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text-on-ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+.section {
+  position: relative;
+  padding: var(--section-pad) 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.section--ink {
+  background-color: var(--ink);
+  color: var(--text-on-ink);
+}
+
+.section--paper {
+  background-color: var(--paper);
+  color: var(--text-on-paper);
+}
+
+/* When a section has a background image (see config/backgrounds.js),
+   this scrim keeps text readable without the component needing to
+   know or care that an image is even there. */
+.section__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.section--ink .section__scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(16, 21, 28, 0.94) 0%,
+    rgba(16, 21, 28, 0.86) 100%
+  );
+}
+
+.section--paper .section__scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(246, 241, 231, 0.94) 0%,
+    rgba(246, 241, 231, 0.9) 100%
+  );
+}
+
+.section__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  padding: 0.85em 1.5em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--solid {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btn--solid:hover {
+  background: var(--accent-soft);
+}
+
+.btn--outline {
+  border-color: var(--line-on-ink);
+  color: var(--text-on-ink);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
