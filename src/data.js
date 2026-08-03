@@ -40,7 +40,7 @@ export const hero = {
   ctaSecondary: { label: 'Get in Touch', href: '#contact', type: 'scroll' },
   stats: [
     { id: 'experience', label: 'Months Experience', value: 8, suffix: '+' },
-    { id: 'projects', label: 'Projects Built', value: 3, suffix: '' },
+    { id: 'projects', label: 'Projects Built', value: 8, suffix: '' },
     { id: 'certifications', label: 'Certifications', value: 3, suffix: '' },
     { id: 'companies', label: 'Companies Worked', value: 2, suffix: '' }
   ]
@@ -186,6 +186,86 @@ export const projects = {
         'Responsive layout across devices'
       ],
       githubUrl: null,
+      liveUrl: null
+    },
+    {
+      id: 'proj-4',
+      title: 'Real-Time Chat Application',
+      image: null,
+      category: ['React', 'Full Stack'],
+      description:
+        'A full-stack real-time chat app with JWT authentication, live messaging, typing indicators and online presence — built with Spring Boot, React and Socket.IO.',
+      stack: ['Java', 'Spring Boot', 'React.js', 'Node.js', 'Socket.IO', 'MySQL'],
+      features: [
+        'JWT-based authentication and role-based access',
+        'Real-time messaging with typing indicators and online presence via Socket.IO',
+        'Persistent chat history stored in MySQL'
+      ],
+      githubUrl: 'https://github.com/jeganbaskar19/ChatApp-RealTime-',
+      liveUrl: null
+    },
+    {
+      id: 'proj-5',
+      title: 'Tech Skill Visualizer',
+      image: null,
+      category: ['React'],
+      description:
+        'An interactive React app that visualizes technical skills through filterable Bar, Doughnut and Radar charts, with a full skill editor and JSON import/export.',
+      stack: ['React', 'Vite', 'Chart.js', 'JavaScript'],
+      features: [
+        'Switchable Bar / Doughnut / Radar chart views with category filtering',
+        'Skill editor with proficiency sliders and category tagging',
+        'JSON export/import for backing up and restoring skill data'
+      ],
+      githubUrl: 'https://github.com/jeganbaskar19/SkillVisualizer-React-',
+      liveUrl: null
+    },
+    {
+      id: 'proj-6',
+      title: 'Quiz Application',
+      image: null,
+      category: ['Spring Boot', 'Full Stack'],
+      description:
+        'A full-stack quiz platform where users log in to attempt quizzes and view their scores, while admins manage the question bank with full CRUD control.',
+      stack: ['Java', 'Spring Boot', 'React.js', 'MySQL'],
+      features: [
+        'User login, quiz attempts and score tracking',
+        'Admin panel to add and update quiz questions',
+        'Full CRUD operations across the question bank'
+      ],
+      githubUrl: 'https://github.com/jeganbaskar19/QuizApp-Frontend-Backend-',
+      liveUrl: null
+    },
+    {
+      id: 'proj-7',
+      title: 'Library Management System',
+      image: null,
+      category: ['Spring Boot', 'Full Stack'],
+      description:
+        'A full-stack library management application for handling the complete book lifecycle — adding, updating, listing and removing books from the catalog.',
+      stack: ['Java', 'Spring Boot', 'React.js', 'MySQL'],
+      features: [
+        'Full CRUD operations for the book catalog',
+        'REST API communication between frontend and backend',
+        'Clean interface for managing inventory at scale'
+      ],
+      githubUrl: 'https://github.com/jeganbaskar19/LibraryManagement-frontend-Backend-',
+      liveUrl: null
+    },
+    {
+      id: 'proj-8',
+      title: 'Balaji PG — Hostel Booking Website',
+      image: null,
+      category: ['React'],
+      description:
+        'A client-commissioned frontend website for a paying-guest accommodation in Coimbatore, built to give the property an online presence for prospective tenants.',
+      stack: ['React', 'Vite', 'JavaScript', 'CSS3'],
+      features: [
+        'Property showcase with room details and contact info',
+        'Responsive, modern client-facing design',
+        'Delivered as a freelance/client project'
+      ],
+      githubUrl: 'https://github.com/jeganbaskar19/balaji-pg',
       liveUrl: null
     }
   ]
