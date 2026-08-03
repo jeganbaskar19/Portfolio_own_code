@@ -186,7 +186,7 @@ export const projects = {
         'Responsive layout across devices'
       ],
       githubUrl: null,
-      liveUrl: null
+      liveUrl: 'https://www.jeganbaskar.in/#home'
     },
     {
       id: 'proj-4',
@@ -284,7 +284,7 @@ export const certifications = {
 export const socials = [
   { id: 'github', label: 'GitHub', icon: 'github', url: 'https://github.com/jeganbaskar19' },
   { id: 'linkedin', label: 'LinkedIn', icon: 'linkedin', url: '#' },
-  { id: 'portfolio', label: 'Live Portfolio', icon: 'globe', url: 'https://skillvisualizer.netlify.app' }
+  { id: 'portfolio', label: 'Live Portfolio', icon: 'globe', url: 'https://www.jeganbaskar.in/#home' }
   // Add / remove entries freely. icon must be one of:
   // 'github' | 'linkedin' | 'behance' | 'instagram' | 'twitter' | 'globe'
   //
