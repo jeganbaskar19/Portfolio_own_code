@@ -302,7 +302,7 @@ export const contact = {
   title: "Let's build something reliable",
   description:
     "Whether it's a bug that needs fixing, a screen that needs building, or a small full-stack project — I'd like to hear about it.",
-  email: 'jeganbaskar19@gmail.com',
+  email: 'hello@jeganbaskar.in',
   phone: '+91 78450 09566',
   location: personal.location,
   availability: personal.availability.label,
