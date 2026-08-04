@@ -1,7 +1,72 @@
-.internships__grid {
+.internships__layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(1rem, 2.5vh, 1.5rem);
+  grid-template-columns: 240px 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+/* --- left: company tabs --- */
+.internships__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.internships__tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--line-on-paper);
+  padding: 0.6rem 0 0.6rem 1rem;
+  color: var(--text-muted-on-paper);
+  transition: color 0.25s ease;
+}
+
+.internships__tab:hover {
+  color: var(--text-on-paper);
+}
+
+.internships__tab--active {
+  color: var(--text-on-paper);
+}
+
+.internships__tab-indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.internships__tab-company {
+  font-family: var(--font-display);
+  font-size: clamp(0.88rem, 1.8vh, 1.02rem);
+}
+
+.internships__tab-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.internships__tab-duration {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--accent-dim);
+  opacity: 0.9;
+}
+
+/* --- right: active card --- */
+.internships__panel {
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .internships__card {
@@ -20,12 +85,30 @@
   flex-wrap: wrap;
 }
 
+.internships__role-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.internships__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(224, 164, 88, 0.14);
+  color: var(--accent-dim);
+  flex-shrink: 0;
+}
+
 .internships__role {
-  font-size: clamp(0.98rem, 2vh, 1.1rem);
+  font-size: clamp(1rem, 2.2vh, 1.15rem);
   color: var(--text-on-paper);
 }
 
-.internships__company {
+.internships__company-line {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--text-muted-on-paper);
@@ -43,7 +126,7 @@
 }
 
 .internships__desc {
-  margin-top: clamp(0.5rem, 1.4vh, 1rem);
+  margin-top: clamp(0.6rem, 1.6vh, 1rem);
   color: var(--text-muted-on-paper);
   line-height: 1.55;
   font-size: clamp(0.82rem, 1.6vh, 0.95rem);
@@ -64,4 +147,40 @@
   border: 1px solid var(--line-on-paper);
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
+}
+
+@media (max-width: 860px) {
+  .internships__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .internships__tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.6rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .internships__tab {
+    border-left: none;
+    border-bottom: 2px solid var(--line-on-paper);
+    padding: 0.35rem 0.2rem 0.6rem;
+    flex-shrink: 0;
+    min-width: 150px;
+  }
+
+  .internships__tab-indicator {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: -2px;
+    width: auto;
+    height: 2px;
+  }
+}
+
+@media (max-height: 680px) {
+  .internships__desc {
+    display: none;
+  }
 }
