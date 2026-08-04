@@ -120,20 +120,109 @@ export const internships = {
 
 export const academics = {
   eyebrow: 'Academics',
-  title: 'Education timeline',
+  title: 'Education Timeline',
   items: [
     {
       id: 'acad-1',
-      degree: 'B.E., Computer Science and Engineering',
+      degree: 'B.E. Computer Science and Engineering',
       college: 'Arjun College of Technology, Coimbatore',
       duration: '2021 — 2025',
-      cgpa: '70%',
+      cgpa: '70% (CGPA 7.0)',
       achievements: [],
-      subjects: ['Data Structures & Algorithms', 'Operating Systems', 'DBMS', 'Computer Networks'],
+      subjects: [
+        'Data Structures & Algorithms',
+        'Operating Systems',
+        'Database Management Systems',
+        'Computer Networks'
+      ],
+      awards: []
+    },
+    {
+      id: 'acad-2',
+      degree: 'Higher Secondary (XII) – Bio-Maths',
+      college: 'AKT Academy Matric Higher Secondary School, Kallakurichi',
+      duration: '2020 — 2021',
+      cgpa: '90%',
+      achievements: [
+        'Secured 90% in Higher Secondary Examination'
+      ],
+      subjects: [
+        'Mathematics',
+        'Biology',
+        'Physics',
+        'Chemistry'
+      ],
+      awards: []
+    },
+    {
+      id: 'acad-3',
+      degree: 'Secondary School (X)',
+      college: 'AKT Memorial High School, Kallakurichi',
+      duration: '2018 — 2019',
+      cgpa: '92%',
+      achievements: [
+        'Secured 92% in Secondary School Examination'
+      ],
+      subjects: [
+        'Mathematics',
+        'Science',
+        'English',
+        'Social Science'
+      ],
       awards: []
     }
   ]
 };
+
+export const skillsSection = {
+  eyebrow: 'Skills & Tech',
+  title: 'Technical Skills',
+  description:
+    'Technologies and tools I use to build scalable, responsive and modern applications.'
+};
+
+export const technicalSkills = [
+  // Programming Languages
+  { name: 'Java', icon: 'FaJava', category: 'Programming Languages', color: '#ED8B00' },
+  { name: 'JavaScript', icon: 'SiJavascript', category: 'Programming Languages', color: '#F7DF1E' },
+  { name: 'Python', icon: 'SiPython', category: 'Programming Languages', color: '#3776AB' },
+  { name: 'Ruby', icon: 'SiRuby', category: 'Programming Languages', color: '#CC342D' },
+  { name: 'HTML5', icon: 'SiHtml5', category: 'Programming Languages', color: '#E34F26' },
+  { name: 'CSS3', icon: 'FaCss3Alt', category: 'Programming Languages', color: '#1572B6' },
+
+  // Frontend
+  { name: 'React.js', icon: 'SiReact', category: 'Frontend', color: '#61DAFB' },
+  { name: 'Tailwind CSS', icon: 'SiTailwindcss', category: 'Frontend', color: '#06B6D4' },
+  { name: 'Bootstrap', icon: 'SiBootstrap', category: 'Frontend', color: '#7952B3' },
+  { name: 'Responsive Design', icon: 'FaMobileAlt', category: 'Frontend', color: '#00BCD4' },
+
+  // Backend
+  { name: 'Ruby on Rails', icon: 'SiRubyonrails', category: 'Backend', color: '#CC0000' },
+  { name: 'Spring Boot', icon: 'SiSpringboot', category: 'Backend', color: '#6DB33F' },
+  { name: 'Node.js', icon: 'SiNodedotjs', category: 'Backend', color: '#5FA04E' },
+  { name: 'REST API', icon: 'FaServer', category: 'Backend', color: '#009688' },
+  { name: 'Servlets & JSP', icon: 'FaServer', category: 'Backend', color: '#FF9800' },
+
+  // Database
+  { name: 'MySQL', icon: 'SiMysql', category: 'Database', color: '#4479A1' },
+  { name: 'MongoDB', icon: 'SiMongodb', category: 'Database', color: '#47A248' },
+  { name: 'JDBC', icon: 'FaDatabase', category: 'Database', color: '#F29111' },
+  { name: 'Relational DB / SQL', icon: 'FaDatabase', category: 'Database', color: '#336791' },
+
+  // Tools
+  { name: 'Git', icon: 'SiGit', category: 'Tools', color: '#F05032' },
+  { name: 'GitHub', icon: 'SiGithub', category: 'Tools', color: '#6e5494' },
+  { name: 'Postman', icon: 'SiPostman', category: 'Tools', color: '#FF6C37' },
+  { name: 'VS Code', icon: 'VscVscode', category: 'Tools', color: '#007ACC' },
+  { name: 'IntelliJ IDEA', icon: 'SiIntellijidea', category: 'Tools', color: '#FE315D' },
+  { name: 'Eclipse', icon: 'SiEclipseide', category: 'Tools', color: '#2C2255' },
+
+  // Concepts
+  { name: 'OOP', icon: 'FaCube', category: 'Concepts', color: '#9C27B0' },
+  { name: 'MVC Architecture', icon: 'FaLayerGroup', category: 'Concepts', color: '#E0A458' },
+  { name: 'Authentication', icon: 'FaLock', category: 'Concepts', color: '#E91E63' },
+  { name: 'Algorithms & DS', icon: 'FaCode', category: 'Concepts', color: '#3F51B5' }
+];
 
 export const projects = {
   eyebrow: 'Projects',
@@ -356,6 +445,7 @@ export const navigation = [
   { id: 'experience', label: 'Experience', href: '#experience' },
   { id: 'internships', label: 'Internships', href: '#internships' },
   { id: 'academics', label: 'Academics', href: '#academics' },
+  { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'projects', label: 'Projects', href: '#projects' },
   { id: 'certifications', label: 'Certifications', href: '#certifications' },
   { id: 'contact', label: 'Contact', href: '#contact' }
@@ -368,6 +458,8 @@ export default {
   experience,
   internships,
   academics,
+  skillsSection,
+  technicalSkills,
   projects,
   certifications,
   socials,
