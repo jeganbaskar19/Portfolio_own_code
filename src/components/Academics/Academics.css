@@ -1,7 +1,73 @@
-.academics__list {
+.academics__layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+/* --- left: institution tabs --- */
+.academics__tabs {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.8rem, 2vh, 1.2rem);
+  gap: 0.3rem;
+}
+
+.academics__tab {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-left: 2px solid var(--line-on-ink);
+  padding: 0.6rem 0 0.6rem 1rem;
+  color: var(--text-muted-on-ink);
+  transition: color 0.25s ease;
+}
+
+.academics__tab:hover {
+  color: var(--text-on-ink);
+}
+
+.academics__tab--active {
+  color: var(--text-on-ink);
+}
+
+.academics__tab-indicator {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.academics__tab-college {
+  font-family: var(--font-display);
+  font-size: clamp(0.86rem, 1.8vh, 1rem);
+  line-height: 1.3;
+}
+
+.academics__tab-degree {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+.academics__tab-duration {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+/* --- right: active card --- */
+.academics__panel {
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .academics__card {
@@ -11,7 +77,7 @@
   padding: clamp(1rem, 2.6vh, 1.8rem);
 }
 
-.academics__top {
+.academics__card-head {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -19,14 +85,39 @@
   flex-wrap: wrap;
 }
 
+.academics__degree-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.academics__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: rgba(224, 164, 88, 0.12);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
 .academics__degree {
   font-size: clamp(1rem, 2.2vh, 1.15rem);
   color: var(--text-on-ink);
 }
 
+.academics__college {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted-on-ink);
+  margin-top: 0.35rem;
+}
+
 .academics__duration {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: var(--accent);
   border: 1px solid var(--line-on-ink);
   padding: 0.28rem 0.65rem;
@@ -34,15 +125,8 @@
   white-space: nowrap;
 }
 
-.academics__college {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--text-muted-on-ink);
-  margin-top: 0.35rem;
-}
-
 .academics__meta {
-  margin-top: clamp(0.5rem, 1.2vh, 0.9rem);
+  margin-top: clamp(0.6rem, 1.6vh, 1rem);
 }
 
 .academics__cgpa {
@@ -65,4 +149,66 @@
   border: 1px solid var(--line-on-ink);
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
+}
+
+.academics__awards {
+  list-style: none;
+  margin: clamp(0.6rem, 1.4vh, 1.1rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.academics__awards li {
+  font-size: clamp(0.78rem, 1.5vh, 0.88rem);
+  color: var(--text-muted-on-ink);
+  line-height: 1.5;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.academics__awards li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--diff-add);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .academics__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .academics__tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 0.6rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .academics__tab {
+    border-left: none;
+    border-bottom: 2px solid var(--line-on-ink);
+    padding: 0.35rem 0.2rem 0.6rem;
+    flex-shrink: 0;
+    min-width: 160px;
+  }
+
+  .academics__tab-indicator {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: -2px;
+    width: auto;
+    height: 2px;
+  }
+}
+
+@media (max-height: 680px) {
+  .academics__subjects :nth-child(n + 5) {
+    display: none;
+  }
 }
