@@ -19,9 +19,9 @@
 // ============================================================
 
 export const emailjsConfig = {
-  serviceId: 'YOUR_SERVICE_ID',
-  templateId: 'YOUR_TEMPLATE_ID',
-  publicKey: 'YOUR_PUBLIC_KEY'
+  serviceId: 'service_hc1zlpr',
+  templateId: 'template_ux8luvu',
+  publicKey: 'EydQGaYKCAQ9zCOcU'
 };
 
 export const isEmailjsConfigured =
