@@ -80,7 +80,9 @@
 
 .hero3d {
   width: 100%;
-  height: clamp(220px, 46vh, 480px);
+  max-width: 100%;
+  height: clamp(280px, 52vh, 540px);
+  overflow: hidden;
 }
 
 .hero__visual-tag {
@@ -88,12 +90,12 @@
   align-items: center;
   gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--text-muted-on-ink);
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   background: var(--ink-soft);
   border: 1px solid var(--line-on-ink);
-  padding: 0.45rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
   max-width: 100%;
   white-space: normal;
@@ -112,14 +114,37 @@
 @media (max-width: 900px) {
   .hero__inner {
     grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__desc {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__ctas {
+    justify-content: center;
+  }
+
+  .hero__stats {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
   }
 
   .hero__visual {
     order: -1;
+    margin-bottom: 1rem;
   }
 
-  .hero__stats {
-    grid-template-columns: repeat(2, auto);
+  .hero3d {
+    height: clamp(250px, 42vh, 420px);
   }
 }
 
@@ -127,61 +152,23 @@
   .hero__ctas {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
 
   .hero__ctas .btn {
     justify-content: center;
     text-align: center;
-  }
-}
-
-/* Short viewports (small laptops, landscape phones): compact further */
-@media (max-height: 760px) {
-  .hero3d {
-    height: clamp(170px, 32vh, 340px);
-  }
-
-  .hero__ctas {
-    margin-top: 0.7rem;
-    gap: 0.55rem;
+    width: 100%;
   }
 
   .hero__stats {
-    margin-top: 0.7rem;
-    padding-top: 0.6rem;
-    gap: 0.6rem 1.4rem;
-  }
-
-  .hero__socials {
-    margin-top: 0.7rem;
-  }
-}
-
-@media (max-height: 660px) {
-  .hero__desc {
-    display: none;
-  }
-
-  .hero__visual-tag {
-    display: none;
-  }
-
-  .hero__socials {
-    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 0.8rem 1rem;
+    padding-top: 1rem;
   }
 
   .hero3d {
-    height: clamp(110px, 22vh, 220px);
-  }
-}
-
-@media (max-height: 560px) {
-  .hero3d {
-    height: clamp(90px, 18vh, 170px);
-  }
-
-  .hero__stats {
-    margin-top: 0.5rem;
-    padding-top: 0.45rem;
+    height: clamp(220px, 38vh, 340px);
   }
 }
