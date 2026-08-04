@@ -1,5 +1,5 @@
 .heading {
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(1rem, 3.5vh, 2.5rem);
   max-width: 640px;
 }
 
@@ -10,13 +10,13 @@
 }
 
 .heading__title {
-  font-size: var(--fs-h2);
-  margin-top: 0.7rem;
+  font-size: clamp(1.7rem, 4.5vh, var(--fs-h2));
+  margin-top: 0.5rem;
 }
 
 .heading__desc {
-  margin-top: 1rem;
-  font-size: 1.02rem;
+  margin-top: 0.7rem;
+  font-size: clamp(0.85rem, 1.6vh, 1.02rem);
   opacity: 0.72;
-  line-height: 1.65;
+  line-height: 1.55;
 }
