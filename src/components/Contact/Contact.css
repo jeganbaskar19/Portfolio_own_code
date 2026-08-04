@@ -127,17 +127,54 @@
   transform: none;
 }
 
-.contact__status {
-  font-size: 0.82rem;
+.contact__status-card {
+  margin-top: 0.6rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.contact__status-card--success {
+  background: rgba(111, 168, 111, 0.12);
+  border: 1px solid var(--diff-add);
+  color: #2b632b;
+}
+
+.contact__status-card--error {
+  background: rgba(193, 102, 107, 0.12);
+  border: 1px solid var(--diff-del);
+  color: #8c262b;
+}
+
+.contact__status-title {
   font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
 }
 
-.contact__status--ok {
-  color: var(--diff-add);
+.contact__status-text {
+  margin: 0;
+  font-size: 0.83rem;
 }
 
-.contact__status--err {
-  color: var(--diff-del);
+.contact__status-link {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.contact__status-link:hover {
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 860px) {
