@@ -19,12 +19,13 @@
 // ============================================================
 
 export const emailjsConfig = {
-  serviceId: 'service_hc1zlpr',
-  templateId: 'template_ux8luvu',
-  publicKey: 'EydQGaYKCAQ9zCOcU'
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_hc1zlpr',
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ux8luvu',
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'EydQGaYKCAQ9zCOcU'
 };
 
 export const isEmailjsConfigured =
+  Boolean(emailjsConfig.serviceId && emailjsConfig.templateId && emailjsConfig.publicKey) &&
   !emailjsConfig.serviceId.startsWith('YOUR_') &&
   !emailjsConfig.templateId.startsWith('YOUR_') &&
   !emailjsConfig.publicKey.startsWith('YOUR_');
