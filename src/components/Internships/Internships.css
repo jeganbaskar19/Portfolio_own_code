@@ -65,8 +65,7 @@
 
 /* --- right: active card --- */
 .internships__panel {
-  max-height: 100%;
-  overflow: hidden;
+  width: 100%;
 }
 
 .internships__card {
@@ -179,8 +178,3 @@
   }
 }
 
-@media (max-height: 680px) {
-  .internships__desc {
-    display: none;
-  }
-}
