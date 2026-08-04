@@ -34,9 +34,8 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08 }}
           >
-            {hero.greeting || personal.greeting},
-            <br />
-            I'm <span className="hero__name">{personal.firstName}</span>
+            {hero.greeting || personal.greeting}{' '}
+            <span className="hero__name">{personal.firstName}</span>
           </motion.h1>
 
           <motion.p
