@@ -282,19 +282,25 @@ export const certifications = {
 };
 
 export const socials = [
-  { id: 'github', label: 'GitHub', icon: 'github', url: 'https://github.com/jeganbaskar19' },
-  { id: 'linkedin', label: 'LinkedIn', icon: 'linkedin', url: '#' },
-  { id: 'portfolio', label: 'Live Portfolio', icon: 'globe', url: 'https://www.jeganbaskar.in/#home' }
-  // Add / remove entries freely. icon must be one of:
-  // 'github' | 'linkedin' | 'behance' | 'instagram' | 'twitter' | 'globe'
-  //
-  // Hovering a social icon shows a small preview card. GitHub's preview
-  // photo is pulled automatically (its avatar is public). Every other
-  // platform doesn't allow that without login, so it shows a styled
-  // placeholder by default — to use a real image instead, add:
-  //   previewImage: '/linkedin-preview.jpg'
-  // (drop that image into /public first). A LinkedIn profile screenshot,
-  // your Behance cover, etc. all work the same way.
+  { id: 'github', label: 'GitHub', icon: 'github', 
+    url: 'https://github.com/jeganbaskar19',
+    previewImage: '/github-preview.png'
+  },
+  {
+    id: 'linkedin', label: 'LinkedIn', icon: 'linkedin',
+    url: 'https://www.linkedin.com/in/jegan2705/',
+    previewImage: '/linked-in-preview.png'
+  },
+  {
+    id: 'portfolio', label: 'Live Portfolio', icon: 'globe',
+    url: 'https://www.jeganbaskar.in/#home',
+    previewImage: '/portfolio-preview.png'
+  },
+  {
+    id: 'instagram', label: 'Instagram', icon: 'instagram',
+    url: 'https://www.instagram.com/jegan.__.stark/',
+    previewImage: '/instagram-preview.png'
+  },
 ];
 
 export const contact = {
