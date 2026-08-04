@@ -47,7 +47,7 @@
   bottom: calc(100% + 14px);
   left: 50%;
   transform: translateX(-50%);
-  width: 168px;
+  width: 260px;
   background: var(--ink-raised);
   border: 1px solid var(--line-on-ink);
   border-radius: 14px;
@@ -59,7 +59,7 @@
 
 .social-preview__media {
   width: 100%;
-  height: 100px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
