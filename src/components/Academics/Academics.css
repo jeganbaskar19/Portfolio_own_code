@@ -66,8 +66,7 @@
 
 /* --- right: active card --- */
 .academics__panel {
-  max-height: 100%;
-  overflow: hidden;
+  width: 100%;
 }
 
 .academics__card {
@@ -207,8 +206,3 @@
   }
 }
 
-@media (max-height: 680px) {
-  .academics__subjects :nth-child(n + 5) {
-    display: none;
-  }
-}
