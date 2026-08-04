@@ -5,6 +5,7 @@ import {
   experience,
   internships,
   academics,
+  technicalSkills,
   certifications,
   contact,
   navigation
@@ -12,12 +13,23 @@ import {
 import './Resume.css';
 
 function Resume() {
-  const skillGroups = [
-    { label: 'Frontend', items: about.technologies.frontend },
-    { label: 'Backend', items: about.technologies.backend },
-    { label: 'Database', items: about.technologies.database },
-    { label: 'Tools', items: about.technologies.tools }
-  ].filter((g) => g.items.length);
+  const categories = [
+    'Programming Languages',
+    'Frontend',
+    'Backend',
+    'Database',
+    'Tools',
+    'Concepts'
+  ];
+
+  const skillGroups = categories
+    .map((cat) => ({
+      label: cat,
+      items: (technicalSkills || [])
+        .filter((s) => s.category === cat)
+        .map((s) => s.name)
+    }))
+    .filter((g) => g.items.length > 0);
 
   return (
     <div className="resume-page">
