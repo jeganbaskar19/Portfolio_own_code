@@ -53,7 +53,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* `proximity` (not `mandatory`) — sections still line up nicely when
+     you scroll near one, but a single wheel/trackpad tick no longer
+     force-jumps a full screen, and the footer (which isn't a snap
+     point) stays reachable instead of getting trapped at the last
+     section. */
+  scroll-snap-type: y proximity;
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -72,6 +78,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--ink);
   color: var(--text-on-ink);
   font-family: var(--font-body);
@@ -145,7 +152,12 @@ img {
   overflow: hidden;
 
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+
+  /* Lets a navbar click (a plain <a href="#id">) land with the
+     section's content clear of the fixed navbar, instead of the top
+     ~80px hiding behind it — which is what made a section look like
+     it had "collapsed" into the next one. */
+  scroll-margin-top: clamp(4.5rem, 9vh, 5.5rem);
 }
 
 .section__inner {
