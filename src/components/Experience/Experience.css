@@ -65,8 +65,7 @@
 
 /* --- right: active card --- */
 .experience__panel {
-  max-height: 100%;
-  overflow: hidden;
+  width: 100%;
 }
 
 .experience__card {
@@ -241,20 +240,4 @@
   }
 }
 
-/* Only show the most important responsibility lines once space gets
-   tight, so the card never needs an internal scrollbar. */
-@media (max-height: 820px) {
-  .experience__list li:nth-child(n + 6) {
-    display: none;
-  }
-}
 
-@media (max-height: 680px) {
-  .experience__list li:nth-child(n + 4) {
-    display: none;
-  }
-
-  .experience__desc {
-    display: none;
-  }
-}
