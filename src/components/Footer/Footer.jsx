@@ -33,12 +33,12 @@ function Footer() {
       <div className="statusbar">
         <div className="container statusbar__inner">
           <span className="statusbar__item">
-            <span className="statusbar__dot" /> main
+            {/* <span className="statusbar__dot" /> main */}
           </span>
-          <span className="statusbar__item">0 problems</span>
+          {/* <span className="statusbar__item">0 problems</span> */}
           <span className="statusbar__item statusbar__item--grow">{footer.copyright}</span>
-          <span className="statusbar__item">UTF-8</span>
-          <span className="statusbar__item">Ln 1, Col 1</span>
+          {/* <span className="statusbar__item">UTF-8</span> */}
+          {/* <span className="statusbar__item">Ln 1, Col 1</span> */}
         </div>
       </div>
     </footer>
