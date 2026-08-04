@@ -1,10 +1,10 @@
 import { Suspense, useMemo, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, useTexture, Sparkles, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { personal } from '../../data';
 
-const FRAME_W = 2.3;
+const FRAME_W = 2.7;
 const FRAME_H = FRAME_W * 1.3;
 
 // Adjusts the texture's repeat/offset so any photo — portrait,
@@ -39,19 +39,24 @@ function useCoverTexture(url, frameW, frameH) {
 
 function PhotoCard() {
   const group = useRef(null);
+  const { viewport } = useThree();
   const texture = useCoverTexture(personal.profileImage, FRAME_W, FRAME_H);
+
+  // Responsive scale factor: automatically scales the 3D card so it
+  // fits cleanly on mobile viewports without overflowing or getting cut off.
+  const responsiveScale = Math.min(1, Math.max(0.62, (viewport.width * 0.7) / FRAME_W));
 
   // gentle tilt that follows the pointer, eases back to rest
   useFrame((state) => {
     if (!group.current) return;
     const { pointer } = state;
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, pointer.x * 0.32, 0.05);
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, -pointer.y * 0.18, 0.05);
+    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, pointer.x * 0.22, 0.05);
+    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, -pointer.y * 0.15, 0.05);
   });
 
   return (
     <Float speed={1.3} rotationIntensity={0.2} floatIntensity={0.55}>
-      <group ref={group}>
+      <group ref={group} scale={responsiveScale}>
         {/* rounded frame behind the photo, gives the "card" edge */}
         <RoundedBox args={[FRAME_W + 0.14, FRAME_H + 0.14, 0.06]} radius={0.14} smoothness={4} position={[0, 0, -0.05]}>
           <meshStandardMaterial color="#e0a458" roughness={0.4} metalness={0.15} />
