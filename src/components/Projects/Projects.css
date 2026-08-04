@@ -215,22 +215,7 @@
   transform: scale(1.3);
 }
 
-/* Keep card feature lists short enough to never need scrolling */
-@media (max-height: 820px) {
-  .projects__features li:nth-child(n + 3) {
-    display: none;
-  }
-}
 
-@media (max-height: 680px) {
-  .projects__desc {
-    display: none;
-  }
-
-  .projects__features li:nth-child(n + 2) {
-    display: none;
-  }
-}
 
 @media (max-width: 640px) {
   .projects__toolbar {
