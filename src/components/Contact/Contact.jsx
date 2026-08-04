@@ -39,7 +39,7 @@ function Contact() {
     const value = e.target.value;
     setForm((f) => ({ ...f, [field]: value }));
     if (touched[field]) {
-      setErrors((prev) => ({ ...validate({ ...form, [field]: value }) }));
+      setErrors(validate({ ...form, [field]: value }));
     }
   };
 
@@ -64,18 +64,26 @@ function Contact() {
 
     if (isEmailjsConfigured) {
       try {
-        await emailjs.send(
+        emailjs.init(emailjsConfig.publicKey);
+        const response = await emailjs.send(
           emailjsConfig.serviceId,
           emailjsConfig.templateId,
           {
+            from_name: form.name,
             name: form.name,
+            user_name: form.name,
+            from_email: form.email,
             email: form.email,
+            user_email: form.email,
+            reply_to: form.email,
             subject: form.subject || `Portfolio enquiry from ${form.name}`,
             message: form.message,
+            to_name: 'Jegan Baskar',
             to_email: contact.email
           },
-          { publicKey: emailjsConfig.publicKey }
+          emailjsConfig.publicKey
         );
+        console.log('EmailJS Success:', response);
         setStatus('success');
         setForm(EMPTY_FORM);
         setTouched({});
@@ -133,57 +141,81 @@ function Contact() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.1} as="form" className="contact__form" onSubmit={handleSubmit} noValidate>
-            <div className="contact__row">
+          <Reveal delay={0.1}>
+            <form className="contact__form" onSubmit={handleSubmit} noValidate>
+              <div className="contact__row">
+                <label>
+                  <span>{contact.formLabels.name}</span>
+                  <input
+                    value={form.name}
+                    onChange={update('name')}
+                    onBlur={markTouched('name')}
+                    type="text"
+                    className={touched.name && errors.name ? 'contact__input--invalid' : ''}
+                    aria-invalid={Boolean(touched.name && errors.name)}
+                  />
+                  {touched.name && errors.name && <span className="contact__field-error">{errors.name}</span>}
+                </label>
+                <label>
+                  <span>{contact.formLabels.email}</span>
+                  <input
+                    value={form.email}
+                    onChange={update('email')}
+                    onBlur={markTouched('email')}
+                    type="email"
+                    className={touched.email && errors.email ? 'contact__input--invalid' : ''}
+                    aria-invalid={Boolean(touched.email && errors.email)}
+                  />
+                  {touched.email && errors.email && <span className="contact__field-error">{errors.email}</span>}
+                </label>
+              </div>
               <label>
-                <span>{contact.formLabels.name}</span>
-                <input
-                  value={form.name}
-                  onChange={update('name')}
-                  onBlur={markTouched('name')}
-                  type="text"
-                  className={touched.name && errors.name ? 'contact__input--invalid' : ''}
-                  aria-invalid={Boolean(touched.name && errors.name)}
-                />
-                {touched.name && errors.name && <span className="contact__field-error">{errors.name}</span>}
+                <span>{contact.formLabels.subject}</span>
+                <input value={form.subject} onChange={update('subject')} type="text" />
               </label>
               <label>
-                <span>{contact.formLabels.email}</span>
-                <input
-                  value={form.email}
-                  onChange={update('email')}
-                  onBlur={markTouched('email')}
-                  type="email"
-                  className={touched.email && errors.email ? 'contact__input--invalid' : ''}
-                  aria-invalid={Boolean(touched.email && errors.email)}
+                <span>{contact.formLabels.message}</span>
+                <textarea
+                  value={form.message}
+                  onChange={update('message')}
+                  onBlur={markTouched('message')}
+                  rows={3}
+                  className={touched.message && errors.message ? 'contact__input--invalid' : ''}
+                  aria-invalid={Boolean(touched.message && errors.message)}
                 />
-                {touched.email && errors.email && <span className="contact__field-error">{errors.email}</span>}
+                {touched.message && errors.message && <span className="contact__field-error">{errors.message}</span>}
               </label>
-            </div>
-            <label>
-              <span>{contact.formLabels.subject}</span>
-              <input value={form.subject} onChange={update('subject')} type="text" />
-            </label>
-            <label>
-              <span>{contact.formLabels.message}</span>
-              <textarea
-                value={form.message}
-                onChange={update('message')}
-                onBlur={markTouched('message')}
-                rows={3}
-                className={touched.message && errors.message ? 'contact__input--invalid' : ''}
-                aria-invalid={Boolean(touched.message && errors.message)}
-              />
-              {touched.message && errors.message && <span className="contact__field-error">{errors.message}</span>}
-            </label>
 
-            <button type="submit" className="btn btn--solid contact__submit" disabled={status === 'sending'}>
-              <FiSend size={15} />
-              {status === 'sending' ? contact.formLabels.sending : contact.formLabels.submit}
-            </button>
+              <button type="submit" className="btn btn--solid contact__submit" disabled={status === 'sending'}>
+                <FiSend size={15} />
+                {status === 'sending' ? contact.formLabels.sending : contact.formLabels.submit}
+              </button>
 
-            {status === 'success' && <p className="contact__status contact__status--ok">{contact.formLabels.success}</p>}
-            {status === 'error' && <p className="contact__status contact__status--err">{contact.formLabels.error}</p>}
+              {status === 'success' && (
+                <div className="contact__status-card contact__status-card--success">
+                  <span className="contact__status-title">✔ Message Sent Successfully!</span>
+                  <p className="contact__status-text">
+                    Thank you for reaching out. Your email has been delivered and I will respond as soon as possible.
+                  </p>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="contact__status-card contact__status-card--error">
+                  <span className="contact__status-title">✖ Could Not Send Email via Form</span>
+                  <p className="contact__status-text">
+                    Please reach out directly via email at{' '}
+                    <a href={`mailto:${contact.email}`} className="contact__status-link">
+                      {contact.email}
+                    </a>{' '}
+                    or call/WhatsApp at{' '}
+                    <a href={`tel:${contact.phone.replace(/\s/g, '')}`} className="contact__status-link">
+                      {contact.phone}
+                    </a>.
+                  </p>
+                </div>
+              )}
+            </form>
           </Reveal>
         </div>
       </div>
