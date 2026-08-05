@@ -268,7 +268,7 @@ export const projects = {
       title: 'This Portfolio',
       image: '/portfolio-preview.png',
       images: ['/portfolio-preview.png'],
-      category: ['React', 'Full Stack'],
+      category: ['React'],
       description:
         'A from-scratch React + Vite portfolio, built with every section driven entirely by configuration files.',
       stack: ['React', 'Vite', 'JavaScript'],
@@ -285,7 +285,7 @@ export const projects = {
       title: 'Real-Time Chat Application',
       image: '/github-preview.png',
       images: ['/chat.png'],
-      category: ['React', 'Full Stack'],
+      category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack real-time chat app with JWT authentication, live messaging, typing indicators and online presence — built with Spring Boot, React and Socket.IO.',
       stack: ['Java', 'Spring Boot', 'React.js', 'Node.js', 'Socket.IO', 'MySQL'],
