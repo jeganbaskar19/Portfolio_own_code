@@ -232,7 +232,8 @@ export const projects = {
     {
       id: 'proj-1',
       title: 'Hotel Room Booking System',
-      image: null,
+      image: '/portfolio-preview.png',
+      images: ['/portfolio-preview.png', '/github-preview.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack hotel booking application covering the complete booking lifecycle — room browsing, booking creation, cancellation, and real-time availability tracking.',
@@ -248,7 +249,8 @@ export const projects = {
     {
       id: 'proj-2',
       title: 'My Task Manager Application',
-      image: null,
+      image: '/portfolio-preview.png',
+      images: ['/portfolio-preview.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A task management system with complete CRUD functionality — task creation, editing, status updates and completion tracking.',
@@ -264,7 +266,8 @@ export const projects = {
     {
       id: 'proj-3',
       title: 'This Portfolio',
-      image: null,
+      image: '/portfolio-preview.png',
+      images: ['/portfolio-preview.png', '/github-preview.png'],
       category: ['React', 'Full Stack'],
       description:
         'A from-scratch React + Vite portfolio, built with every section driven entirely by configuration files.',
@@ -280,7 +283,8 @@ export const projects = {
     {
       id: 'proj-4',
       title: 'Real-Time Chat Application',
-      image: null,
+      image: '/github-preview.png',
+      images: ['/github-preview.png', '/linked-in-preview.png'],
       category: ['React', 'Full Stack'],
       description:
         'A full-stack real-time chat app with JWT authentication, live messaging, typing indicators and online presence — built with Spring Boot, React and Socket.IO.',
@@ -296,7 +300,8 @@ export const projects = {
     {
       id: 'proj-5',
       title: 'Tech Skill Visualizer',
-      image: null,
+      image: '/github-preview.png',
+      images: ['/github-preview.png'],
       category: ['React'],
       description:
         'An interactive React app that visualizes technical skills through filterable Bar, Doughnut and Radar charts, with a full skill editor and JSON import/export.',
@@ -312,7 +317,8 @@ export const projects = {
     {
       id: 'proj-6',
       title: 'Quiz Application',
-      image: null,
+      image: '/github-preview.png',
+      images: ['/github-preview.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack quiz platform where users log in to attempt quizzes and view their scores, while admins manage the question bank with full CRUD control.',
@@ -328,7 +334,8 @@ export const projects = {
     {
       id: 'proj-7',
       title: 'Library Management System',
-      image: null,
+      image: '/github-preview.png',
+      images: ['/github-preview.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack library management application for handling the complete book lifecycle — adding, updating, listing and removing books from the catalog.',
@@ -344,7 +351,8 @@ export const projects = {
     {
       id: 'proj-8',
       title: 'Balaji PG — Hostel Booking Website',
-      image: null,
+      image: '/instagram-preview.png',
+      images: ['/instagram-preview.png', '/portfolio-preview.png'],
       category: ['React'],
       description:
         'A client-commissioned frontend website for a paying-guest accommodation in Coimbatore, built to give the property an online presence for prospective tenants.',
