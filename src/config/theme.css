@@ -27,10 +27,10 @@
   --line-on-ink: rgba(246, 241, 231, 0.14);
   --line-on-paper: rgba(16, 21, 28, 0.12);
 
-  /* --- Fonts (see src/config/fonts.js) --- */
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-body: 'Manrope', 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  /* --- Fonts --- */
+  --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 
   /* --- Type scale --- */
   --fs-eyebrow: 0.78rem;
