@@ -213,30 +213,41 @@
 @media (max-width: 860px) {
   .experience__layout {
     grid-template-columns: 1fr;
+    gap: 1.2rem;
   }
 
   .experience__tabs {
     flex-direction: row;
     overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     gap: 0.6rem;
-    padding-bottom: 0.4rem;
+    padding: 0.2rem 0.2rem 0.6rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .experience__tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .experience__tab {
-    border-left: none;
-    border-bottom: 2px solid var(--line-on-ink);
-    padding: 0.35rem 0.2rem 0.6rem;
+    border: 1px solid var(--line-on-ink);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    min-width: auto;
     flex-shrink: 0;
-    min-width: 150px;
+    background: rgba(246, 241, 231, 0.04);
+    transition: all 0.25s ease;
+  }
+
+  .experience__tab--active {
+    border-color: var(--accent);
+    background: rgba(224, 164, 88, 0.16);
   }
 
   .experience__tab-indicator {
-    left: 0;
-    right: 0;
-    top: auto;
-    bottom: -2px;
-    width: auto;
-    height: 2px;
+    display: none;
   }
 }
 
