@@ -48,12 +48,14 @@
 .navbar__links--desktop a,
 .navbar__links--mobile a {
   color: var(--text-muted-on-ink);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .navbar__links--desktop a:hover,
-.navbar__links--mobile a:hover {
-  color: var(--accent);
+.navbar__links--mobile a:hover,
+.navbar__link--active {
+  color: var(--accent) !important;
+  font-weight: 600;
 }
 
 .navbar__cta {
