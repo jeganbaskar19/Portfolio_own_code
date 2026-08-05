@@ -1,35 +1,48 @@
+/* ============================================================
+   PROJECTS SECTION STYLES (3D Flip Cards & Dual Navigation Modes)
+   ============================================================ */
+
+.projects {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+/* --- Toolbar & Filters --- */
+
 .projects__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: clamp(0.9rem, 2.2vh, 1.6rem);
+  margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
   margin-top: -0.4rem;
 }
 
 .projects__filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 
 .projects__filter {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   background: transparent;
   border: 1px solid var(--line-on-paper);
   color: var(--text-muted-on-paper);
-  padding: 0.42rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: 999px;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+  cursor: pointer;
 }
 
 .projects__filter--active,
 .projects__filter:hover {
   border-color: var(--accent);
   color: var(--text-on-paper);
-  background: rgba(224, 164, 88, 0.14);
+  background: rgba(224, 164, 88, 0.15);
 }
 
 .projects__nav {
@@ -41,13 +54,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 1px solid var(--line-on-paper);
   background: var(--paper);
   color: var(--text-on-paper);
   transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
 }
 
 .projects__nav-btn:hover:not(:disabled) {
@@ -57,69 +71,97 @@
 }
 
 .projects__nav-btn:disabled {
-  opacity: 0.3;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 
-/* --- horizontal slidable track --- */
-.projects__viewport {
+/* ============================================================
+   3D FLIP CARD CONTAINER
+   ============================================================ */
+
+.projects__card-wrapper {
+  perspective: 1000px;
+  width: clamp(300px, 32vw, 370px);
+  height: 420px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.projects__card-inner {
+  position: relative;
   width: 100%;
+  height: 100%;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-.projects__track {
-  display: flex;
-  gap: clamp(0.8rem, 2vw, 1.25rem);
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding: 0.2rem 0.2rem 0.6rem;
-  margin: -0.2rem -0.2rem 0;
+/* Flip trigger on hover / focus / mobile tap */
+.projects__card-wrapper:hover .projects__card-inner,
+.projects__card-wrapper--flipped .projects__card-inner {
+  transform: rotateY(180deg);
 }
 
-/* hide the native scrollbar — arrows + drag/swipe handle navigation */
-.projects__track {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+/* Front & Back Faces */
 
-.projects__track::-webkit-scrollbar {
-  display: none;
-}
-
-.projects__card {
-  flex: 0 0 clamp(240px, 78vw, 300px);
-  scroll-snap-align: start;
-  background: var(--paper);
-  border: 1px solid var(--line-on-paper);
+.projects__card-front,
+.projects__card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: var(--radius-md);
-  padding: clamp(0.9rem, 2.4vh, 1.5rem);
+  padding: clamp(1.1rem, 2.4vh, 1.6rem);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projects__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(16, 21, 28, 0.08);
+/* --- FRONT FACE --- */
+
+.projects__card-front {
+  background: var(--paper-soft);
+  border: 1px solid var(--line-on-paper);
+  z-index: 2;
+  transform: rotateY(0deg);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.projects__card-wrapper:hover .projects__card-front {
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(16, 21, 28, 0.1), 0 0 20px rgba(224, 164, 88, 0.18);
 }
 
 .projects__card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .projects__index {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--accent-dim);
+  font-weight: 700;
+}
+
+.projects__flip-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  border: 1px solid var(--line-on-paper);
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(224, 164, 88, 0.1);
 }
 
 .projects__title {
-  font-size: clamp(0.98rem, 2.1vh, 1.1rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
   margin-top: clamp(0.5rem, 1.2vh, 0.9rem);
   color: var(--text-on-paper);
 }
@@ -127,95 +169,258 @@
 .projects__desc {
   margin-top: clamp(0.4rem, 1vh, 0.6rem);
   color: var(--text-muted-on-paper);
-  font-size: clamp(0.78rem, 1.4vh, 0.88rem);
-  line-height: 1.48;
+  font-size: clamp(0.82rem, 1.4vh, 0.9rem);
+  line-height: 1.5;
 }
 
 .projects__features {
-  margin: clamp(0.4rem, 1vh, 0.8rem) 0 0;
-  padding-left: 1rem;
+  margin: clamp(0.5rem, 1vh, 0.9rem) 0 0;
+  padding-left: 1.1rem;
   color: var(--text-muted-on-paper);
-  font-size: clamp(0.74rem, 1.3vh, 0.82rem);
+  font-size: clamp(0.76rem, 1.3vh, 0.84rem);
   line-height: 1.45;
   flex: 1;
+  overflow: hidden;
 }
 
 .projects__features li {
-  margin-bottom: 0.22rem;
+  margin-bottom: 0.25rem;
 }
 
 .projects__stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.32rem;
-  margin-top: clamp(0.5rem, 1.2vh, 1rem);
-  padding-top: clamp(0.4rem, 1vh, 0.9rem);
+  gap: 0.35rem;
+  margin-top: auto;
+  padding-top: clamp(0.5rem, 1vh, 0.8rem);
   border-top: 1px solid var(--line-on-paper);
 }
 
 .projects__stack-item {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   color: var(--text-on-paper);
   background: rgba(16, 21, 28, 0.06);
-  padding: 0.24rem 0.5rem;
+  padding: 0.25rem 0.55rem;
   border-radius: 999px;
+}
+
+.projects__front-footer {
+  margin-top: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--accent-dim);
+  text-align: right;
+  opacity: 0.85;
+}
+
+/* --- BACK FACE --- */
+
+.projects__card-back {
+  background: var(--paper);
+  border: 1px solid var(--accent);
+  transform: rotateY(180deg);
+  box-shadow: 0 16px 36px rgba(16, 21, 28, 0.12), 0 0 24px rgba(224, 164, 88, 0.2);
+  justify-content: space-between;
+}
+
+.projects__back-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.projects__back-title {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  color: var(--text-on-paper);
+}
+
+.projects__back-category {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted-on-paper);
+}
+
+/* Preview Image Grid Container */
+
+.projects__preview-box {
+  flex: 1;
+  margin: 0.8rem 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line-on-paper);
+  background: rgba(16, 21, 28, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects__preview-grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem;
+}
+
+.projects__preview-grid--multi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+
+.projects__preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line-on-paper);
+  transition: transform 0.3s ease;
+}
+
+.projects__card-wrapper:hover .projects__preview-img {
+  transform: scale(1.03);
 }
 
 .projects__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: clamp(0.5rem, 1.2vh, 1rem);
+  gap: 0.6rem;
+  margin-top: auto;
 }
 
 .projects__action {
+  flex: 1;
   display: inline-flex;
   align-items: center;
-  gap: 0.32rem;
+  justify-content: center;
+  gap: 0.4rem;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  padding: 0.38rem 0.7rem;
+  font-size: 0.75rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid var(--line-on-paper);
-  color: var(--text-on-paper);
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-}
-
-.projects__action:not(.projects__action--disabled):hover {
-  border-color: var(--accent-dim);
-  color: var(--accent-dim);
-  background: rgba(224, 164, 88, 0.1);
+  transition: all 0.25s ease;
+  white-space: nowrap;
 }
 
 .projects__action--disabled {
+  border: 1px solid var(--line-on-paper);
+  color: var(--text-muted-on-paper);
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* --- dot indicators --- */
+/* ============================================================
+   MODE 1: ALL FILTER -> Continuous Horizontal Leftward Marquee
+   ============================================================ */
+
+.projects__marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 4%,
+    black 96%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 4%,
+    black 96%,
+    transparent 100%
+  );
+  padding: 0.8rem 0;
+}
+
+.projects__track--marquee {
+  display: flex;
+  gap: clamp(1.2rem, 2vw, 1.8rem);
+  width: max-content;
+  will-change: transform;
+  animation: projectsMarqueeLeft 45s linear infinite;
+}
+
+.projects__marquee-item {
+  flex-shrink: 0;
+}
+
+/* Hovering over any card pauses the marquee track AND flips the hovered card */
+.projects__marquee:hover .projects__track--marquee {
+  animation-play-state: paused;
+}
+
+@keyframes projectsMarqueeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ============================================================
+   MODE 2: FILTERED MODE -> Manual Slider Track with Arrows
+   ============================================================ */
+
+.projects__viewport {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.projects__track--manual {
+  display: flex;
+  gap: clamp(1.2rem, 2vw, 1.8rem);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.4rem 0.2rem 0.8rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.projects__track--manual::-webkit-scrollbar {
+  display: none;
+}
+
+.projects__manual-item {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+/* Pagination Dots */
+
 .projects__dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: clamp(0.6rem, 1.6vh, 1.1rem);
+  margin-top: clamp(0.8rem, 1.8vh, 1.4rem);
 }
 
 .projects__dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   border: none;
   background: var(--line-on-paper);
   transition: background 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
 }
 
 .projects__dot--active {
   background: var(--accent);
-  transform: scale(1.3);
+  transform: scale(1.35);
 }
 
-
+/* ============================================================
+   RESPONSIVE DESIGN (Mobile & Tablet Adjustments)
+   ============================================================ */
 
 @media (max-width: 640px) {
   .projects__toolbar {
@@ -225,5 +430,45 @@
 
   .projects__nav {
     align-self: flex-end;
+  }
+
+  .projects__card-wrapper {
+    width: clamp(270px, 84vw, 320px);
+    height: 400px;
+  }
+
+  .projects__card-front,
+  .projects__card-back {
+    padding: 1rem 1.1rem;
+  }
+
+  .projects__preview-grid--multi {
+    grid-template-columns: 1fr;
+  }
+
+  .projects__actions {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .projects__action {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .projects__track--marquee {
+    animation: none !important;
+  }
+  .projects__marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .projects__card-inner {
+    transition: none !important;
   }
 }
