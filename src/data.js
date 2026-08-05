@@ -352,7 +352,7 @@ export const projects = {
       id: 'proj-8',
       title: 'Balaji PG — Hostel Booking Website',
       image: '/instagram-preview.png',
-      images: ['/Task.png'],
+      images: ['/BalajiPG.png'],
       category: ['React'],
       description:
         'A client-commissioned frontend website for a paying-guest accommodation in Coimbatore, built to give the property an online presence for prospective tenants.',
