@@ -232,8 +232,8 @@ export const projects = {
     {
       id: 'proj-1',
       title: 'Hotel Room Booking System',
-      image: '/portfolio-preview.png',
-      images: ['/portfolio-preview.png', '/github-preview.png'],
+      image: '/portfolio-previpng',
+      images: ['/Hotel.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack hotel booking application covering the complete booking lifecycle — room browsing, booking creation, cancellation, and real-time availability tracking.',
@@ -243,14 +243,14 @@ export const projects = {
         'Real-time room status management',
         'Responsive booking interface with optimised database queries'
       ],
-      githubUrl: null,
+      githubUrl: "https://github.com/jeganbaskar19/HotelRoomFullStack-Frontend-Backend-",
       liveUrl: null
     },
     {
       id: 'proj-2',
       title: 'My Task Manager Application',
       image: '/portfolio-preview.png',
-      images: ['/portfolio-preview.png'],
+      images: ['/Task.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A task management system with complete CRUD functionality — task creation, editing, status updates and completion tracking.',
@@ -260,14 +260,14 @@ export const projects = {
         'Structured data flow between frontend and backend',
         'Clean, responsive UI with optimised query performance'
       ],
-      githubUrl: null,
+      githubUrl: "https://github.com/jeganbaskar19/MyTaskManager",
       liveUrl: null
     },
     {
       id: 'proj-3',
       title: 'This Portfolio',
       image: '/portfolio-preview.png',
-      images: ['/portfolio-preview.png', '/github-preview.png'],
+      images: ['/portfolio-preview.png'],
       category: ['React', 'Full Stack'],
       description:
         'A from-scratch React + Vite portfolio, built with every section driven entirely by configuration files.',
@@ -277,14 +277,14 @@ export const projects = {
         'Light/dark theme system',
         'Responsive layout across devices'
       ],
-      githubUrl: null,
-      liveUrl: 'https://www.jeganbaskar.in/#home'
+      githubUrl:'https://github.com/jeganbaskar19/Portfolio_own_code',
+      liveUrl: 'https://www.jeganbaskar.in/'
     },
     {
       id: 'proj-4',
       title: 'Real-Time Chat Application',
       image: '/github-preview.png',
-      images: ['/github-preview.png', '/linked-in-preview.png'],
+      images: ['/chat.png'],
       category: ['React', 'Full Stack'],
       description:
         'A full-stack real-time chat app with JWT authentication, live messaging, typing indicators and online presence — built with Spring Boot, React and Socket.IO.',
@@ -301,7 +301,7 @@ export const projects = {
       id: 'proj-5',
       title: 'Tech Skill Visualizer',
       image: '/github-preview.png',
-      images: ['/github-preview.png'],
+      images: ['/Skill.png'],
       category: ['React'],
       description:
         'An interactive React app that visualizes technical skills through filterable Bar, Doughnut and Radar charts, with a full skill editor and JSON import/export.',
@@ -312,13 +312,13 @@ export const projects = {
         'JSON export/import for backing up and restoring skill data'
       ],
       githubUrl: 'https://github.com/jeganbaskar19/SkillVisualizer-React-',
-      liveUrl: null
+      liveUrl: "https://skillvisualizer.netlify.app/"
     },
     {
       id: 'proj-6',
       title: 'Quiz Application',
       image: '/github-preview.png',
-      images: ['/github-preview.png'],
+      images: ['/Quiz.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack quiz platform where users log in to attempt quizzes and view their scores, while admins manage the question bank with full CRUD control.',
@@ -335,7 +335,7 @@ export const projects = {
       id: 'proj-7',
       title: 'Library Management System',
       image: '/github-preview.png',
-      images: ['/github-preview.png'],
+      images: ['/Librarry.png'],
       category: ['Spring Boot', 'Full Stack'],
       description:
         'A full-stack library management application for handling the complete book lifecycle — adding, updating, listing and removing books from the catalog.',
@@ -352,7 +352,7 @@ export const projects = {
       id: 'proj-8',
       title: 'Balaji PG — Hostel Booking Website',
       image: '/instagram-preview.png',
-      images: ['/instagram-preview.png', '/portfolio-preview.png'],
+      images: ['/Task.png'],
       category: ['React'],
       description:
         'A client-commissioned frontend website for a paying-guest accommodation in Coimbatore, built to give the property an online presence for prospective tenants.',
