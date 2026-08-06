@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { FiGithub, FiExternalLink, FiChevronLeft, FiChevronRight, FiRotateCw } from 'react-icons/fi';
 import { projects } from '../../data';
 import { backgrounds } from '../../config/backgrounds';
@@ -11,7 +11,9 @@ function Projects() {
   const [flippedCards, setFlippedCards] = useState({});
   const bgStyle = backgrounds.projects ? { backgroundImage: `url(${backgrounds.projects})` } : undefined;
 
-  const visible = active === 'All' ? projects.items : projects.items.filter((p) => p.category.includes(active));
+  const visible = useMemo(() => {
+    return active === 'All' ? projects.items : projects.items.filter((p) => p.category.includes(active));
+  }, [active]);
 
   const isMarqueeMode = active === 'All';
 
@@ -23,9 +25,9 @@ function Projects() {
   const [canNext, setCanNext] = useState(true);
 
   cardRefs.current = [];
-  const registerCard = (el) => {
+  const registerCard = useCallback((el) => {
     if (el) cardRefs.current.push(el);
-  };
+  }, []);
 
   const updateArrows = useCallback(() => {
     const track = trackRef.current;
@@ -52,27 +54,27 @@ function Projects() {
     }
   }, [visible.length, isMarqueeMode, updateArrows]);
 
-  const scrollToCard = (i) => {
+  const scrollToCard = useCallback((i) => {
     const card = cardRefs.current[i];
     const track = trackRef.current;
     if (!card || !track) return;
     track.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
-  };
+  }, []);
 
-  const scrollByOne = (dir) => {
+  const scrollByOne = useCallback((dir) => {
     const track = trackRef.current;
     if (!track) return;
     const cardWidth = cardRefs.current[0]?.offsetWidth || 300;
     const gap = 16;
     track.scrollBy({ left: dir * (cardWidth + gap), behavior: 'smooth' });
-  };
+  }, []);
 
-  const toggleFlip = (id) => {
+  const toggleFlip = useCallback((id) => {
     setFlippedCards((prev) => ({
       ...prev,
       [id]: !prev[id]
     }));
-  };
+  }, []);
 
   const renderCardContent = (p, displayIndex) => {
     const isFlipped = Boolean(flippedCards[p.id]);
@@ -137,6 +139,9 @@ function Projects() {
                     alt={`${p.title} preview screenshot ${imgIdx + 1}`}
                     className="projects__preview-img"
                     loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="250"
                   />
                 ))}
               </div>
@@ -190,7 +195,6 @@ function Projects() {
             ))}
           </div>
 
-          {/* Show manual navigation arrows only when a specific category filter is active */}
           {!isMarqueeMode && (
             <div className="projects__nav">
               <button
@@ -213,7 +217,6 @@ function Projects() {
           )}
         </div>
 
-        {/* MODE 1: ALL FILTER -> Continuous Horizontal Leftward Marquee Mode */}
         {isMarqueeMode ? (
           <Reveal className="projects__marquee">
             <div className="projects__track projects__track--marquee">
@@ -225,7 +228,6 @@ function Projects() {
             </div>
           </Reveal>
         ) : (
-          /* MODE 2: FILTERED MODE -> Manual Slider Track with Arrows & Navigation Dots */
           <Reveal className="projects__viewport">
             <div className="projects__track projects__track--manual" ref={trackRef} onScroll={updateArrows}>
               {visible.map((p, i) => (
@@ -237,7 +239,6 @@ function Projects() {
           </Reveal>
         )}
 
-        {/* Display pagination dots in manual filtered mode */}
         {!isMarqueeMode && visible.length > 1 && (
           <div className="projects__dots">
             {visible.map((p, i) => (
@@ -255,4 +256,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default memo(Projects);
