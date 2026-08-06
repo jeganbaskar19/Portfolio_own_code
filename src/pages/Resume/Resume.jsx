@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import {
   personal,
-  about,
   experience,
   internships,
   academics,
