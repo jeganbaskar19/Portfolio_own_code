@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/title_profile.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
     <meta name="theme-color" content="#10151c" />
+
+    <!-- Preload LCP Profile Image for fast visual paint -->
+    <link rel="preload" as="image" href="/profile.jpg" fetchpriority="high" />
 
     <!-- Primary SEO Meta Tags -->
     <title>Jegan Baskar — Associate Full Stack Developer | Portfolio</title>
@@ -18,7 +22,7 @@
       content="Jegan Baskar, Full Stack Developer, Ruby on Rails Developer, Java Developer, Spring Boot, React.js, JavaScript, Web Developer Portfolio, Coimbatore, Software Engineer"
     />
     <meta name="author" content="Jegan Baskar" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://www.jeganbaskar.in/" />
 
     <!-- Open Graph / Facebook / LinkedIn SEO Meta Tags -->
@@ -31,6 +35,9 @@
       content="Associate Full Stack Developer working across Ruby on Rails, JavaScript, Java, Spring Boot, and React.js."
     />
     <meta property="og:image" content="https://www.jeganbaskar.in/portfolio-preview.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card SEO Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -52,33 +59,58 @@
 
     <!-- Schema.org JSON-LD Structured Data for Search Engine Optimization -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Jegan Baskar",
-        "jobTitle": "Associate Full Stack Developer",
-        "url": "https://www.jeganbaskar.in/",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Coimbatore",
-          "addressRegion": "Tamil Nadu",
-          "addressCountry": "India"
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "@id": "https://www.jeganbaskar.in/#person",
+          "name": "Jegan Baskar",
+          "jobTitle": "Associate Full Stack Developer",
+          "url": "https://www.jeganbaskar.in/",
+          "image": "https://www.jeganbaskar.in/profile.jpg",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Coimbatore",
+            "addressRegion": "Tamil Nadu",
+            "addressCountry": "India"
+          },
+          "sameAs": [
+            "https://github.com/jeganbaskar19",
+            "https://www.linkedin.com/in/jegan2705/",
+            "https://www.instagram.com/jegan.__.stark/"
+          ],
+          "knowsAbout": [
+            "Ruby on Rails",
+            "JavaScript",
+            "React.js",
+            "Java",
+            "Spring Boot",
+            "MySQL",
+            "Full Stack Web Development"
+          ]
         },
-        "sameAs": [
-          "https://github.com/jeganbaskar19",
-          "https://www.linkedin.com/in/jegan2705/",
-          "https://www.instagram.com/jegan.__.stark/"
-        ],
-        "knowsAbout": [
-          "Ruby on Rails",
-          "JavaScript",
-          "React.js",
-          "Java",
-          "Spring Boot",
-          "MySQL",
-          "Full Stack Web Development"
-        ]
-      }
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://www.jeganbaskar.in/#website",
+          "url": "https://www.jeganbaskar.in/",
+          "name": "Jegan Baskar Portfolio",
+          "description": "Portfolio of Jegan Baskar — Associate Full Stack Developer.",
+          "publisher": {
+            "@id": "https://www.jeganbaskar.in/#person"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "@id": "https://www.jeganbaskar.in/#webpage",
+          "url": "https://www.jeganbaskar.in/",
+          "name": "Jegan Baskar — Associate Full Stack Developer | Portfolio",
+          "mainEntity": {
+            "@id": "https://www.jeganbaskar.in/#person"
+          }
+        }
+      ]
     </script>
   </head>
   <body>

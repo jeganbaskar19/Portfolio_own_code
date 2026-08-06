@@ -1,0 +1,16 @@
+{
+  "name": "Jegan Baskar - Full Stack Developer Portfolio",
+  "short_name": "Jegan Baskar",
+  "description": "Portfolio of Jegan Baskar — Associate Full Stack Developer specializing in Ruby on Rails, React.js, Java, and Spring Boot.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#10151c",
+  "theme_color": "#10151c",
+  "icons": [
+    {
+      "src": "/title_profile.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
