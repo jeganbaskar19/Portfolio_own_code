@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { about } from '../../data';
 import { backgrounds } from '../../config/backgrounds';
 import SectionHeading from '../shared/SectionHeading';
@@ -6,12 +7,13 @@ import './About.css';
 
 function About() {
   const bgStyle = backgrounds.about ? { backgroundImage: `url(${backgrounds.about})` } : undefined;
-  const techGroups = [
+  
+  const techGroups = useMemo(() => [
     { label: 'Frontend', items: about.technologies.frontend },
     { label: 'Backend', items: about.technologies.backend },
     { label: 'Database', items: about.technologies.database },
     { label: 'Tools', items: about.technologies.tools }
-  ].filter((g) => g.items.length);
+  ].filter((g) => g.items.length), []);
 
   return (
     <section id="about" className="section section--paper about" style={bgStyle}>
@@ -57,4 +59,4 @@ function About() {
   );
 }
 
-export default About;
+export default memo(About);
