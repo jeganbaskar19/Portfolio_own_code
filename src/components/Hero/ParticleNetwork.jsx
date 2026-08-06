@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './ParticleNetwork.css';
 
-// Lightweight canvas "plexus" network — auto-pauses when off-screen for 60/120 FPS performance.
+// Lightweight canvas "plexus" network — auto-pauses when off-screen/background tab, hardware-adaptive.
 function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
   const canvasRef = useRef(null);
 
@@ -11,26 +11,36 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
     const ctx = canvas.getContext('2d');
     let width, height, points, raf;
     let isVisible = true;
+    let isTabActive = true;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window);
+    const cores = navigator.hardwareConcurrency || 4;
+    const isLowPower = isMobile || cores <= 4;
 
     const resize = () => {
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
-      canvas.width = width * (window.devicePixelRatio || 1);
-      canvas.height = height * (window.devicePixelRatio || 1);
-      ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
+      const dpr = isLowPower ? 1 : Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(70, Math.max(24, Math.floor(width * height * density)));
+      // Scale particle count dynamically based on hardware power
+      const maxCount = isLowPower ? 16 : 60;
+      const minCount = isLowPower ? 10 : 20;
+      const count = Math.min(maxCount, Math.max(minCount, Math.floor(width * height * density)));
+
       points = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25
+        vx: (Math.random() - 0.5) * (isLowPower ? 0.15 : 0.25),
+        vy: (Math.random() - 0.5) * (isLowPower ? 0.15 : 0.25)
       }));
     };
 
     const step = () => {
-      if (!isVisible) return;
+      if (!isVisible || !isTabActive) return;
       ctx.clearRect(0, 0, width, height);
 
       for (const p of points) {
@@ -42,7 +52,7 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
         }
       }
 
-      const maxDist = Math.min(150, width * 0.14);
+      const maxDist = Math.min(isLowPower ? 110 : 150, width * 0.14);
 
       for (let i = 0; i < points.length; i++) {
         for (let j = i + 1; j < points.length; j++) {
@@ -73,7 +83,7 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
-        if (isVisible) {
+        if (isVisible && isTabActive) {
           cancelAnimationFrame(raf);
           raf = requestAnimationFrame(step);
         } else {
@@ -83,7 +93,18 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
       { threshold: 0.05 }
     );
 
+    const handleVisibilityChange = () => {
+      isTabActive = document.visibilityState === 'visible';
+      if (isVisible && isTabActive) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(step);
+      } else {
+        cancelAnimationFrame(raf);
+      }
+    };
+
     observer.observe(canvas);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     resize();
     step();
 
@@ -93,6 +114,7 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
     return () => {
       cancelAnimationFrame(raf);
       observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('resize', onResize);
     };
   }, [color, density]);
