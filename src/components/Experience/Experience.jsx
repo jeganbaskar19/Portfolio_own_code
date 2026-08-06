@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiBriefcase, FiMapPin } from 'react-icons/fi';
 import { experience } from '../../data';
@@ -113,4 +113,4 @@ function Experience() {
   );
 }
 
-export default Experience;
+export default memo(Experience);
