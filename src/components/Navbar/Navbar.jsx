@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { navigation, personal } from '../../data';
 import './Navbar.css';
@@ -9,10 +9,11 @@ function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const onScroll = () => {
+    let ticking = false;
+
+    const updateScrollSpy = () => {
       setScrolled(window.scrollY > 24);
 
-      // Determine active section for scroll-spy highlighting
       const sectionIds = navigation.map((item) => item.href.replace('#', ''));
       const scrollPosition = window.scrollY + 140;
 
@@ -23,14 +24,23 @@ function Navbar() {
           break;
         }
       }
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollSpy);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    updateScrollSpy();
+
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = useCallback((e, href) => {
     e.preventDefault();
     setOpen(false);
 
@@ -53,7 +63,7 @@ function Navbar() {
       });
       setActiveSection(targetId);
     }
-  };
+  }, []);
 
   return (
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
@@ -123,4 +133,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default memo(Navbar);
