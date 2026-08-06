@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, memo, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { hero, personal } from '../../data';
@@ -138,4 +138,4 @@ function Hero() {
   );
 }
 
-export default Hero;
+export default memo(Hero);
