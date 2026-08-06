@@ -1,23 +1,24 @@
 import { useEffect, useRef } from 'react';
 import './ParticleNetwork.css';
 
-// Lightweight canvas "plexus" network — no dependency, tuned to stay
-// under ~70 nodes so it stays smooth on low-end laptops too.
+// Lightweight canvas "plexus" network — auto-pauses when off-screen for 60/120 FPS performance.
 function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width, height, points, raf;
+    let isVisible = true;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const resize = () => {
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
-      canvas.width = width * devicePixelRatio;
-      canvas.height = height * devicePixelRatio;
-      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+      canvas.width = width * (window.devicePixelRatio || 1);
+      canvas.height = height * (window.devicePixelRatio || 1);
+      ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
 
       const count = Math.min(70, Math.max(24, Math.floor(width * height * density)));
       points = Array.from({ length: count }, () => ({
@@ -29,6 +30,7 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
     };
 
     const step = () => {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
       for (const p of points) {
@@ -68,14 +70,29 @@ function ParticleNetwork({ color = '224, 164, 88', density = 0.00009 }) {
       raf = requestAnimationFrame(step);
     };
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(step);
+        } else {
+          cancelAnimationFrame(raf);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(canvas);
     resize();
     step();
 
     const onResize = () => resize();
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
+      observer.disconnect();
       window.removeEventListener('resize', onResize);
     };
   }, [color, density]);

@@ -1,13 +1,33 @@
+import { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { hero, personal } from '../../data';
 import { backgrounds } from '../../config/backgrounds';
-import Hero3D from './Hero3D';
 import ParticleNetwork from './ParticleNetwork';
 import AnimatedCounter from '../shared/AnimatedCounter';
 import TypedRoles from '../shared/TypedRoles';
 import SocialLinks from '../shared/SocialLinks';
 import './Hero.css';
+
+const Hero3D = lazy(() => import('./Hero3D'));
+
+function Hero3DFallback() {
+  return (
+    <div className="hero3d" aria-hidden="true" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div
+        style={{
+          width: '270px',
+          height: '350px',
+          borderRadius: '16px',
+          background: 'rgba(224, 164, 88, 0.08)',
+          border: '1px solid rgba(224, 164, 88, 0.2)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+          animation: 'pulse 2s infinite ease-in-out'
+        }}
+      />
+    </div>
+  );
+}
 
 function Hero() {
   const bgStyle = backgrounds.hero ? { backgroundImage: `url(${backgrounds.hero})` } : undefined;
@@ -105,7 +125,9 @@ function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Hero3D />
+          <Suspense fallback={<Hero3DFallback />}>
+            <Hero3D />
+          </Suspense>
           <div className="hero__visual-tag">
             <span className="hero__visual-dot" />
             {personal.availability.label}

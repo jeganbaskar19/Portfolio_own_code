@@ -260,3 +260,33 @@ img {
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ============================================================
+   PERFORMANCE & RENDERING OPTIMIZATIONS (60/120 FPS)
+   ============================================================ */
+
+/* GPU Hardware Acceleration for smooth transforms */
+.hero,
+.section,
+.card,
+.btn,
+.navbar {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Content visibility containment for off-screen sections */
+@media (min-width: 768px) {
+  #about,
+  #experience,
+  #internships,
+  #academics,
+  #skills,
+  #projects,
+  #certifications,
+  #contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+}
+
