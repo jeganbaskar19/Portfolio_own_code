@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { technicalSkills, skillsSection } from '../../data';
 import { backgrounds } from '../../config/backgrounds';
 import SectionHeading from '../shared/SectionHeading';
@@ -9,18 +9,19 @@ import './Skills.css';
 function Skills() {
   const bgStyle = backgrounds?.skills ? { backgroundImage: `url(${backgrounds.skills})` } : undefined;
 
-  const total = technicalSkills.length;
+  const { row1Skills, row2Skills, row3Skills, col1Skills, col2Skills } = useMemo(() => {
+    const total = technicalSkills.length;
+    const chunkSize = Math.ceil(total / 3);
+    const halfSize = Math.ceil(total / 2);
 
-  // Split skills into 3 rows for Desktop horizontal marquee
-  const chunkSize = Math.ceil(total / 3);
-  const row1Skills = technicalSkills.slice(0, chunkSize);
-  const row2Skills = technicalSkills.slice(chunkSize, chunkSize * 2);
-  const row3Skills = technicalSkills.slice(chunkSize * 2);
-
-  // Split skills into 2 columns for Mobile vertical rolling marquee
-  const halfSize = Math.ceil(total / 2);
-  const col1Skills = technicalSkills.slice(0, halfSize);
-  const col2Skills = technicalSkills.slice(halfSize);
+    return {
+      row1Skills: technicalSkills.slice(0, chunkSize),
+      row2Skills: technicalSkills.slice(chunkSize, chunkSize * 2),
+      row3Skills: technicalSkills.slice(chunkSize * 2),
+      col1Skills: technicalSkills.slice(0, halfSize),
+      col2Skills: technicalSkills.slice(halfSize)
+    };
+  }, []);
 
   return (
     <section id="skills" className="section section--ink skills" style={bgStyle}>
@@ -36,11 +37,7 @@ function Skills() {
         />
 
         <Reveal className="skills__content">
-          {/* =========================================================
-              DESKTOP & TABLET: 3 Horizontal Marquee Rows
-             ========================================================= */}
           <div className="skills__horizontal-wrapper">
-            {/* Row 1: Moves Left ➜ Right */}
             <div className="skills__marquee skills__marquee--row1">
               <div className="skills__track skills__track--left">
                 {[...row1Skills, ...row1Skills].map((skill, index) => (
@@ -49,7 +46,6 @@ function Skills() {
               </div>
             </div>
 
-            {/* Row 2: Moves Right ➜ Left */}
             <div className="skills__marquee skills__marquee--row2">
               <div className="skills__track skills__track--right">
                 {[...row2Skills, ...row2Skills].map((skill, index) => (
@@ -58,7 +54,6 @@ function Skills() {
               </div>
             </div>
 
-            {/* Row 3: Moves Left ➜ Right */}
             <div className="skills__marquee skills__marquee--row3">
               <div className="skills__track skills__track--left">
                 {[...row3Skills, ...row3Skills].map((skill, index) => (
@@ -68,11 +63,7 @@ function Skills() {
             </div>
           </div>
 
-          {/* =========================================================
-              MOBILE: 2 Vertical Rolling Columns (Upward & Downward)
-             ========================================================= */}
           <div className="skills__vertical-wrapper">
-            {/* Column 1: Rolls UPWARD */}
             <div className="skills__vcol">
               <div className="skills__vtrack skills__vtrack--up">
                 {[...col1Skills, ...col1Skills].map((skill, index) => (
@@ -81,7 +72,6 @@ function Skills() {
               </div>
             </div>
 
-            {/* Column 2: Rolls DOWNWARD */}
             <div className="skills__vcol">
               <div className="skills__vtrack skills__vtrack--down">
                 {[...col2Skills, ...col2Skills].map((skill, index) => (
@@ -96,4 +86,4 @@ function Skills() {
   );
 }
 
-export default Skills;
+export default memo(Skills);
