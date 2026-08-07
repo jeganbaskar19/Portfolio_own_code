@@ -11,6 +11,7 @@ export const personal = {
   roles: [
     'Full Stack Developer',
     'Ruby on Rails Developer',
+    'FastAPI Developer'
     'Java & Spring Boot Developer',
     'React.js Developer'
   ],
