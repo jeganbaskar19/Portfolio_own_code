@@ -1,5 +1,5 @@
 // =============================================================
-// GROQ PROVIDER
+// GROQ PROVIDER — ESM
 // Calls Groq's OpenAI-compatible API (free tier: 14,400 req/day)
 // Model: llama-3.1-8b-instant (fast, capable, free)
 // =============================================================
@@ -12,7 +12,7 @@ const DEFAULT_MODEL = 'llama-3.1-8b-instant';
  * @param {Array<{role: string, content: string}>} messages
  * @returns {Promise<string>} AI reply text
  */
-async function callGroq(systemPrompt, messages) {
+export async function callGroq(systemPrompt, messages) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) throw new Error('GROQ_API_KEY is not set');
 
@@ -31,7 +31,7 @@ async function callGroq(systemPrompt, messages) {
       temperature: 0.5,
       stream: false
     }),
-    signal: AbortSignal.timeout(12000) // 12s timeout
+    signal: AbortSignal.timeout(12000)
   });
 
   if (!response.ok) {
@@ -44,5 +44,3 @@ async function callGroq(systemPrompt, messages) {
   if (!content) throw new Error('Groq returned an empty response');
   return content.trim();
 }
-
-module.exports = { callGroq };
