@@ -12,7 +12,7 @@ const DEFAULT_MODEL = 'mistralai/mistral-7b-instruct:free';
  * @returns {Promise<string>} AI reply text
  */
 export async function callOpenRouter(systemPrompt, messages) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const apiKey = process.env.openrouterkey || process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error('OPENROUTER_API_KEY is not set');
 
   const model = process.env.OPENROUTER_MODEL || DEFAULT_MODEL;
