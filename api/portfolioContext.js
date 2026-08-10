@@ -1,12 +1,10 @@
 // =============================================================
-// PORTFOLIO AI CONTEXT — SERVER-SIDE ONLY
-// This file is used ONLY by api/chat.js (serverless function).
-// It is NEVER imported into any frontend React component.
-// It contains all of Jegan's portfolio information as a
-// structured context string for the AI system prompt.
+// PORTFOLIO AI CONTEXT — SERVER-SIDE ONLY — ESM
+// Used ONLY by api/chat.js (serverless function).
+// NEVER imported into any frontend React component.
 // =============================================================
 
-const portfolioContext = `
+export const portfolioContext = `
 ABOUT JEGAN BASKAR
 ==================
 Full Name: Jegan Baskar
@@ -184,5 +182,3 @@ He has 8+ months of professional experience plus a prior Java full-stack interns
 He is open to new opportunities and freelance projects.
 He brings a fast learning curve, a habit of reading the actual error before guessing at a fix, and a track record of resolving production issues.
 `;
-
-module.exports = { portfolioContext };
