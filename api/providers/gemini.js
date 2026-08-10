@@ -1,7 +1,6 @@
 // =============================================================
-// GOOGLE GEMINI PROVIDER
+// GOOGLE GEMINI PROVIDER — ESM
 // Calls Gemini 1.5 Flash REST API (free tier: 1,500 req/day)
-// Used as secondary fallback when Groq is unavailable.
 // =============================================================
 
 const GEMINI_API_URL =
@@ -12,7 +11,7 @@ const GEMINI_API_URL =
  * @param {Array<{role: string, content: string}>} messages
  * @returns {Promise<string>} AI reply text
  */
-async function callGemini(systemPrompt, messages) {
+export async function callGemini(systemPrompt, messages) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) throw new Error('GEMINI_API_KEY is not set');
 
@@ -46,5 +45,3 @@ async function callGemini(systemPrompt, messages) {
   if (!content) throw new Error('Gemini returned an empty response');
   return content.trim();
 }
-
-module.exports = { callGemini };
