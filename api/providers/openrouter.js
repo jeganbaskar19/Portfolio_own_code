@@ -1,7 +1,6 @@
 // =============================================================
-// OPENROUTER PROVIDER
-// Calls OpenRouter free models (e.g. mistralai/mistral-7b-instruct:free)
-// Used as tertiary fallback.
+// OPENROUTER PROVIDER — ESM
+// Calls OpenRouter free models (mistralai/mistral-7b-instruct:free)
 // =============================================================
 
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -12,7 +11,7 @@ const DEFAULT_MODEL = 'mistralai/mistral-7b-instruct:free';
  * @param {Array<{role: string, content: string}>} messages
  * @returns {Promise<string>} AI reply text
  */
-async function callOpenRouter(systemPrompt, messages) {
+export async function callOpenRouter(systemPrompt, messages) {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) throw new Error('OPENROUTER_API_KEY is not set');
 
@@ -45,5 +44,3 @@ async function callOpenRouter(systemPrompt, messages) {
   if (!content) throw new Error('OpenRouter returned an empty response');
   return content.trim();
 }
-
-module.exports = { callOpenRouter };
