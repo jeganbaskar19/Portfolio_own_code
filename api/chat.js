@@ -1,29 +1,23 @@
 // =============================================================
-// POST /api/chat — Vercel Serverless Function
-// 
+// POST /api/chat — Vercel Serverless Function (ESM)
+//
 // This is the ONLY server-side file that touches API keys.
 // API keys are read from environment variables — never from
 // frontend code, never from Git, never from the browser.
-//
-// Architecture:
-//   Browser → POST /api/chat → AI Provider → Response
-//                                 ↓ (on any failure)
-//              Returns { source: "fallback" } so the
-//              frontend falls back to qaEngine.js automatically
 // =============================================================
 
-const { portfolioContext } = require('./portfolioContext');
-const { callGroq } = require('./providers/groq');
-const { callGemini } = require('./providers/gemini');
-const { callOpenRouter } = require('./providers/openrouter');
+import { portfolioContext } from './portfolioContext.js';
+import { callGroq } from './providers/groq.js';
+import { callGemini } from './providers/gemini.js';
+import { callOpenRouter } from './providers/openrouter.js';
 
 // ----- Constants -----
-const MAX_MESSAGE_LENGTH = 500;    // characters — reject abuse
-const MAX_HISTORY_MESSAGES = 6;    // keep last 6 turns (3 user + 3 assistant)
-const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute window
-const RATE_LIMIT_MAX_REQUESTS = 15; // max 15 requests per IP per minute
+const MAX_MESSAGE_LENGTH = 500;
+const MAX_HISTORY_MESSAGES = 6;
+const RATE_LIMIT_WINDOW_MS = 60000;
+const RATE_LIMIT_MAX_REQUESTS = 15;
 
-// ----- Simple in-memory rate limiter (resets on cold start) -----
+// ----- Simple in-memory rate limiter -----
 const rateLimitMap = new Map();
 
 function isRateLimited(ip) {
@@ -31,7 +25,6 @@ function isRateLimited(ip) {
   const record = rateLimitMap.get(ip) || { count: 0, windowStart: now };
 
   if (now - record.windowStart > RATE_LIMIT_WINDOW_MS) {
-    // Reset window
     record.count = 1;
     record.windowStart = now;
   } else {
@@ -40,7 +33,7 @@ function isRateLimited(ip) {
 
   rateLimitMap.set(ip, record);
 
-  // Clean up old entries periodically to avoid memory leak
+  // Cleanup old entries
   if (rateLimitMap.size > 500) {
     for (const [key, val] of rateLimitMap.entries()) {
       if (now - val.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
@@ -76,20 +69,25 @@ ${portfolioContext}`;
 async function callAIProvider(systemPrompt, messages) {
   const provider = (process.env.AI_PROVIDER || 'groq').toLowerCase();
 
-  const providerChain = [];
+  let providerChain;
 
-  // Build chain based on configured primary provider
   if (provider === 'gemini') {
-    providerChain.push({ name: 'gemini', fn: callGemini });
-    providerChain.push({ name: 'groq', fn: callGroq });
+    providerChain = [
+      { name: 'gemini', fn: callGemini },
+      { name: 'groq', fn: callGroq }
+    ];
   } else if (provider === 'openrouter') {
-    providerChain.push({ name: 'openrouter', fn: callOpenRouter });
-    providerChain.push({ name: 'groq', fn: callGroq });
+    providerChain = [
+      { name: 'openrouter', fn: callOpenRouter },
+      { name: 'groq', fn: callGroq }
+    ];
   } else {
     // Default: groq → gemini → openrouter
-    providerChain.push({ name: 'groq', fn: callGroq });
-    providerChain.push({ name: 'gemini', fn: callGemini });
-    providerChain.push({ name: 'openrouter', fn: callOpenRouter });
+    providerChain = [
+      { name: 'groq', fn: callGroq },
+      { name: 'gemini', fn: callGemini },
+      { name: 'openrouter', fn: callOpenRouter }
+    ];
   }
 
   let lastError = null;
@@ -115,7 +113,7 @@ const CORS_HEADERS = {
 };
 
 // ----- Main Handler -----
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Set CORS headers
   Object.entries(CORS_HEADERS).forEach(([k, v]) => res.setHeader(k, v));
 
@@ -153,12 +151,10 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid request body', source: 'error' });
   }
 
-  // Empty message check
   if (!message) {
     return res.status(400).json({ error: 'Message cannot be empty', source: 'error' });
   }
 
-  // Length check
   if (message.length > MAX_MESSAGE_LENGTH) {
     return res.status(400).json({
       error: `Message is too long. Please keep it under ${MAX_MESSAGE_LENGTH} characters.`,
@@ -166,7 +162,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  // ----- Build message history for AI (trim to last N messages) -----
+  // ----- Build message history for AI -----
   const trimmedHistory = history
     .slice(-MAX_HISTORY_MESSAGES)
     .filter(
@@ -177,22 +173,20 @@ module.exports = async function handler(req, res) {
         (m.role === 'user' || m.role === 'assistant')
     );
 
-  // Append current user message
   const messages = [...trimmedHistory, { role: 'user', content: message }];
 
   // ----- Call AI -----
   try {
     const systemPrompt = buildSystemPrompt();
     const { answer, provider } = await callAIProvider(systemPrompt, messages);
-
     return res.status(200).json({ answer, provider, source: 'ai' });
   } catch (err) {
     console.error('[chat] All providers failed:', err.message);
-    // Return a signal to the frontend to fall back to qaEngine.js
+    // Tell the frontend to fall back to qaEngine.js
     return res.status(200).json({
       answer: null,
       source: 'fallback',
       error: 'AI service temporarily unavailable'
     });
   }
-};
+}
