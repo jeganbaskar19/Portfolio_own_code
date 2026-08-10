@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FiMessageCircle, FiX, FiSend } from 'react-icons/fi';
 import { askAssistant, suggestedQuestions } from './qaEngine';
@@ -7,18 +7,22 @@ import './AIAssistant.css';
 
 const INITIAL_MESSAGE = {
   role: 'bot',
-  text: `Hi! I'm ${personal.firstName}'s AI. Ask me about his skills, experience, or projects.`
+  text: `Hi! I'm ${personal.firstName}'s AI assistant. Ask me about his skills, experience, projects or how to reach him.`,
+  source: 'ai'
 };
 
-// Small randomised delay so replies feel like they're being "thought
-// through" rather than instant — purely cosmetic, still zero API cost.
-const THINK_DELAY = () => 500 + Math.random() * 500;
+// Max conversation history to send to the AI (keeps token usage low)
+const MAX_HISTORY = 6;
+
+// Cosmetic delay so responses don't feel instant (300–700ms)
+const THINK_DELAY = () => 300 + Math.random() * 400;
 
 function AIAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [draft, setDraft] = useState('');
   const [typing, setTyping] = useState(false);
+  const [aiMode, setAiMode] = useState(false); // true = AI responded at least once
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -27,20 +31,83 @@ function AIAssistant() {
     }
   }, [messages, open, typing]);
 
-  const send = (text) => {
-    const trimmed = text.trim();
-    if (!trimmed || typing) return;
+  // Build history array in OpenAI format for the API
+  const buildHistory = useCallback((currentMessages) => {
+    return currentMessages
+      .filter((m) => m.role === 'user' || m.role === 'bot')
+      .slice(-MAX_HISTORY)
+      .map((m) => ({
+        role: m.role === 'user' ? 'user' : 'assistant',
+        content: m.text
+      }));
+  }, []);
 
-    setMessages((prev) => [...prev, { role: 'user', text: trimmed }]);
-    setDraft('');
-    setTyping(true);
+  const send = useCallback(
+    async (text) => {
+      const trimmed = text.trim();
+      if (!trimmed || typing) return;
 
-    const reply = askAssistant(trimmed);
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { role: 'bot', text: reply }]);
-      setTyping(false);
-    }, THINK_DELAY());
-  };
+      // Add user message immediately
+      const userMsg = { role: 'user', text: trimmed };
+      setMessages((prev) => [...prev, userMsg]);
+      setDraft('');
+      setTyping(true);
+
+      // Capture history BEFORE adding user message (we'll append it server-side)
+      const history = buildHistory(messages);
+
+      try {
+        // Call the Vercel serverless function
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: trimmed, history }),
+          signal: AbortSignal.timeout(15000) // 15s browser-side timeout
+        });
+
+        const data = await response.json();
+
+        // If AI returned a real answer — use it
+        if (data.source === 'ai' && data.answer) {
+          setAiMode(true);
+          setTimeout(() => {
+            setMessages((prev) => [
+              ...prev,
+              { role: 'bot', text: data.answer, source: 'ai', provider: data.provider }
+            ]);
+            setTyping(false);
+          }, THINK_DELAY());
+          return;
+        }
+
+        // Rate limit message
+        if (data.source === 'ratelimit') {
+          setTimeout(() => {
+            setMessages((prev) => [
+              ...prev,
+              { role: 'bot', text: data.error, source: 'ratelimit' }
+            ]);
+            setTyping(false);
+          }, THINK_DELAY());
+          return;
+        }
+
+        // source === 'fallback' or any unexpected response → use qaEngine
+        throw new Error('AI fallback requested');
+      } catch {
+        // Network error, timeout, or AI fallback → use local qaEngine
+        const fallbackReply = askAssistant(trimmed);
+        setTimeout(() => {
+          setMessages((prev) => [
+            ...prev,
+            { role: 'bot', text: fallbackReply, source: 'local' }
+          ]);
+          setTyping(false);
+        }, THINK_DELAY());
+      }
+    },
+    [typing, messages, buildHistory]
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -62,7 +129,10 @@ function AIAssistant() {
               <div className="assistant__header-info">
                 <span className="assistant__dot" />
                 <div>
-                  <p className="assistant__title">{personal.firstName} AI</p>
+                  <p className="assistant__title">
+                    {personal.firstName} AI
+                    {aiMode && <span className="assistant__ai-badge">✦ AI</span>}
+                  </p>
                   <p className="assistant__subtitle">Answers about my work, live</p>
                 </div>
               </div>
@@ -122,6 +192,7 @@ function AIAssistant() {
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder="Ask a question..."
                 aria-label="Ask the assistant a question"
+                maxLength={500}
               />
               <button
                 type="submit"
