@@ -27,7 +27,7 @@ export async function callGroq(systemPrompt, messages) {
     body: JSON.stringify({
       model,
       messages: [{ role: 'system', content: systemPrompt }, ...messages],
-      max_tokens: 400,
+      max_tokens: 250,
       temperature: 0.5,
       stream: false
     }),
