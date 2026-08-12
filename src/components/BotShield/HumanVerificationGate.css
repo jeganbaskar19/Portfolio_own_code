@@ -1,0 +1,151 @@
+/* ============================================================
+   AUTOMATED BOT SHIELD & HUMAN VERIFICATION GATE STYLES
+   ============================================================ */
+
+.bot-shield-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #10151c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.bot-shield-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(224, 164, 88, 0.12) 0%, rgba(16, 21, 28, 0.98) 70%);
+  pointer-events: none;
+}
+
+.bot-shield-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(23, 30, 39, 0.95);
+  border: 1px solid rgba(224, 164, 88, 0.25);
+  border-radius: 20px;
+  padding: 2.25rem 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(224, 164, 88, 0.08);
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #f6f1e7;
+}
+
+.bot-shield-icon-wrapper {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: rgba(224, 164, 88, 0.1);
+  border: 1px solid rgba(224, 164, 88, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e0a458;
+}
+
+.bot-shield-title {
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: #f6f1e7;
+}
+
+.bot-shield-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  color: rgba(246, 241, 231, 0.68);
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+.bot-shield-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(246, 241, 231, 0.06);
+  border: 1px solid rgba(246, 241, 231, 0.12);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: rgba(246, 241, 231, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+.bot-shield-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6fa86f;
+  box-shadow: 0 0 8px #6fa86f;
+}
+
+.bot-shield-action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: #e0a458;
+  color: #10151c;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.95rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(224, 164, 88, 0.25);
+}
+
+.bot-shield-action-btn:hover:not(:disabled) {
+  background: #f1c88a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(224, 164, 88, 0.35);
+}
+
+.bot-shield-action-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.bot-shield-footer-note {
+  margin-top: 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(246, 241, 231, 0.4);
+}
+
+.bot-shield-blocked-card {
+  border-color: rgba(193, 102, 107, 0.4);
+}
+
+.bot-shield-blocked-icon {
+  background: rgba(193, 102, 107, 0.15);
+  border-color: rgba(193, 102, 107, 0.4);
+  color: #c1666b;
+}
+
+.bot-shield-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(16, 21, 28, 0.3);
+  border-top-color: #10151c;
+  border-radius: 50%;
+  animation: botShieldSpin 0.8s linear infinite;
+}
+
+@keyframes botShieldSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
