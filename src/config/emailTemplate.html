@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Portfolio Message — Jegan Baskar</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0b0f14;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #f6f1e7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #0b0f14;
+      padding: 40px 10px;
+    }
+    .main {
+      background-color: #171e27;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 16px;
+      border: 1px solid rgba(224, 164, 88, 0.25);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #10151c 0%, #1d2530 100%);
+      padding: 32px 36px;
+      border-bottom: 1px solid rgba(224, 164, 88, 0.2);
+    }
+    .brand {
+      font-family: 'JetBrains Mono', monospace;
+      color: #e0a458;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #f6f1e7;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .body-content {
+      padding: 32px 36px;
+    }
+    .meta-card {
+      background: rgba(16, 21, 28, 0.6);
+      border-left: 3px solid #e0a458;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+    .meta-row {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .meta-row:last-child {
+      margin-bottom: 0;
+    }
+    .meta-label {
+      color: rgba(246, 241, 231, 0.5);
+      font-weight: 500;
+      width: 85px;
+      display: inline-block;
+    }
+    .meta-val {
+      color: #f6f1e7;
+      font-weight: 600;
+    }
+    .message-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e0a458;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .message-box {
+      background: rgba(10, 14, 19, 0.7);
+      border: 1px solid rgba(246, 241, 231, 0.1);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #f6f1e7;
+      white-space: pre-line;
+    }
+    .reply-btn {
+      display: inline-block;
+      margin-top: 28px;
+      background-color: #e0a458;
+      color: #10151c !important;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 26px;
+      border-radius: 999px;
+    }
+    .footer {
+      background: #10151c;
+      padding: 24px 36px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(246, 241, 231, 0.4);
+      border-top: 1px solid rgba(246, 241, 231, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="main">
+      <div class="header">
+        <div class="brand">Jegan Baskar Portfolio · Contact Form</div>
+        <h1 class="title">New Message Received</h1>
+      </div>
+      <div class="body-content">
+        <div class="meta-card">
+          <div class="meta-row">
+            <span class="meta-label">From:</span>
+            <span class="meta-val">{{from_name}}</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Email:</span>
+            <span class="meta-val"><a href="mailto:{{from_email}}" style="color:#e0a458; text-decoration:none;">{{from_email}}</a></span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Subject:</span>
+            <span class="meta-val">{{subject}}</span>
+          </div>
+        </div>
+
+        <div class="message-title">Message Body</div>
+        <div class="message-box">
+{{message}}
+        </div>
+
+        <a href="mailto:{{from_email}}?subject=Re: {{subject}}" class="reply-btn">Reply to {{from_name}}</a>
+      </div>
+      <div class="footer">
+        Automated email sent via Jegan Baskar's Portfolio Contact Form (EmailJS Integration)
+      </div>
+    </div>
+  </div>
+</body>
+</html>
