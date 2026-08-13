@@ -24,7 +24,7 @@ export const personal = {
     label: 'Open to new opportunities & Freelance Projects'
   },
   location: 'Coimbatore, Tamil Nadu, India',
-  resumeUrl: '/resume.pdf',
+  resumeUrl: '/Jegan_Baskar_Associate_FullStack_Developer.pdf',
   profileImage: '/profile.jpg',
   quote: {
     text: "Great software isn't written.\nIt's debugged, refined, and shipped.",
