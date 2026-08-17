@@ -93,8 +93,10 @@ function AIAssistant() {
         }
 
         // source === 'fallback' or any unexpected response → use qaEngine
-        throw new Error('AI fallback requested');
-      } catch {
+        console.warn('[AIAssistant] Live AI endpoint returned fallback:', data?.error || 'Unknown fallback reason');
+        throw new Error(data?.error || 'AI fallback requested');
+      } catch (err) {
+        console.warn('[AIAssistant] Live AI unavailable, using local Q&A fallback:', err?.message || err);
         // Network error, timeout, or AI fallback → use local qaEngine
         const fallbackReply = askAssistant(trimmed);
         setTimeout(() => {
