@@ -31,7 +31,7 @@ export async function callGroq(systemPrompt, messages) {
       temperature: 0.5,
       stream: false
     }),
-    signal: AbortSignal.timeout(12000)
+    signal: AbortSignal.timeout(3500)
   });
 
   if (!response.ok) {
