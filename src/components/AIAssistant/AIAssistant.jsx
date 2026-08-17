@@ -14,8 +14,8 @@ const INITIAL_MESSAGE = {
 // Max conversation history to send to the AI (keeps token usage low)
 const MAX_HISTORY = 6;
 
-// Cosmetic delay so responses don't feel instant (300–700ms)
-const THINK_DELAY = () => 300 + Math.random() * 400;
+// Instant cosmetic delay (100ms max)
+const THINK_DELAY = () => 100;
 
 function AIAssistant() {
   const [open, setOpen] = useState(false);
@@ -53,16 +53,31 @@ function AIAssistant() {
       setDraft('');
       setTyping(true);
 
-      // Capture history BEFORE adding user message (we'll append it server-side)
+      // Fast check: If local QA engine has a matching answer, answer instantly (~100ms)
+      const localReply = askAssistant(trimmed);
+      const isFallback = localReply.startsWith("I'm not sure about that one");
+
+      if (!isFallback) {
+        setTimeout(() => {
+          setMessages((prev) => [
+            ...prev,
+            { role: 'bot', text: localReply, source: 'local' }
+          ]);
+          setTyping(false);
+        }, THINK_DELAY());
+        return;
+      }
+
+      // Capture history BEFORE adding user message
       const history = buildHistory(messages);
 
       try {
-        // Call the Vercel serverless function
+        // Call the Vercel serverless function with fast 4.5s timeout
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: trimmed, history }),
-          signal: AbortSignal.timeout(15000) // 15s browser-side timeout
+          signal: AbortSignal.timeout(4500)
         });
 
         const data = await response.json();
@@ -92,17 +107,13 @@ function AIAssistant() {
           return;
         }
 
-        // source === 'fallback' or any unexpected response → use qaEngine
-        console.warn('[AIAssistant] Live AI endpoint returned fallback:', data?.error || 'Unknown fallback reason');
         throw new Error(data?.error || 'AI fallback requested');
       } catch (err) {
         console.warn('[AIAssistant] Live AI unavailable, using local Q&A fallback:', err?.message || err);
-        // Network error, timeout, or AI fallback → use local qaEngine
-        const fallbackReply = askAssistant(trimmed);
         setTimeout(() => {
           setMessages((prev) => [
             ...prev,
-            { role: 'bot', text: fallbackReply, source: 'local' }
+            { role: 'bot', text: localReply, source: 'local' }
           ]);
           setTyping(false);
         }, THINK_DELAY());
