@@ -31,7 +31,7 @@ export async function callOpenRouter(systemPrompt, messages) {
       max_tokens: 400,
       temperature: 0.5
     }),
-    signal: AbortSignal.timeout(15000)
+    signal: AbortSignal.timeout(3500)
   });
 
   if (!response.ok) {
