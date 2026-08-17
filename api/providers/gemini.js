@@ -32,7 +32,7 @@ export async function callGemini(systemPrompt, messages) {
         temperature: 0.5
       }
     }),
-    signal: AbortSignal.timeout(12000)
+    signal: AbortSignal.timeout(3500)
   });
 
   if (!response.ok) {
