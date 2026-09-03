@@ -448,6 +448,46 @@ export const animations = {
   reduceMotionRespected: true
 };
 
+export const clientProjects = {
+  eyebrow: 'Featured Work',
+  title: 'Valuable Live Projects',
+  description: 'Production applications, multi-branch management systems, and admin dashboards built and deployed for real clients.',
+  items: [
+    {
+      id: 'wonder-women-fitness',
+      title: 'Wonder Women Fitness Centre',
+      location: 'Trichy, Tamil Nadu',
+      clientName: 'Wonder Women Fitness',
+      role: 'Lead Full-Stack Developer & Freelance Engineer',
+      duration: '2026',
+      description:
+        'A multi-branch fitness centre management system and web portal built to streamline member registrations, branch metrics, and marketing pipelines.',
+      deliverables: [
+        'Multi-Branch Gym Management & Member Tracking',
+        'Real-time Revenue & Attendance Analytics Dashboard',
+        'Lead Management & Event Registration Pipeline',
+        '3D Transformation Showcase & Weekly Program CMS'
+      ],
+      stack: [
+        'Next.js 15',
+        'TypeScript',
+        'Tailwind CSS',
+        'Prisma ORM',
+        'Supabase PostgreSQL',
+        'NextAuth.js',
+        'Recharts',
+        'Zod'
+      ],
+      liveUrl: 'https://www.wonderwomenfitnesscentre.com',
+      images: {
+        publicUI: '/client web photos/Wonderwomen Gym/public site img.jpeg',
+        adminAnalytics: '/client web photos/Wonderwomen Gym/Analytics_dashboard.jpeg',
+        adminEnquiry: '/client web photos/Wonderwomen Gym/Enquiry management.jpeg'
+      }
+    }
+  ]
+};
+
 export const navigation = [
   { id: 'home', label: 'Home', href: '#home' },
   { id: 'about', label: 'About', href: '#about' },
@@ -456,6 +496,7 @@ export const navigation = [
   { id: 'academics', label: 'Academics', href: '#academics' },
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'projects', label: 'Projects', href: '#projects' },
+  { id: 'client-projects', label: 'Live Projects', href: '#client-projects' },
   { id: 'certifications', label: 'Certifications', href: '#certifications' },
   { id: 'contact', label: 'Contact', href: '#contact' }
 ];
@@ -470,6 +511,7 @@ export default {
   skillsSection,
   technicalSkills,
   projects,
+  clientProjects,
   certifications,
   socials,
   contact,
