@@ -3,6 +3,19 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import { navigation, personal } from '../../data';
 import './Navbar.css';
 
+const SECTION_PATH_MAP = {
+  'home': '/',
+  'client-projects': '/live-projects',
+  'contact': '/contact',
+  'projects': '/projects',
+  'about': '/about',
+  'experience': '/experience',
+  'skills': '/skills',
+  'certifications': '/certifications',
+  'academics': '/academics',
+  'internships': '/internships'
+};
+
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -20,7 +33,14 @@ function Navbar() {
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
         if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(sectionIds[i]);
+          const currentSec = sectionIds[i];
+          setActiveSection(currentSec);
+
+          // Dynamically update browser address bar without page reload
+          const targetPath = SECTION_PATH_MAP[currentSec];
+          if (targetPath && window.location.pathname !== targetPath && window.location.pathname !== '/resume') {
+            window.history.replaceState(null, '', targetPath);
+          }
           break;
         }
       }
@@ -45,6 +65,11 @@ function Navbar() {
     setOpen(false);
 
     const targetId = href.replace('#', '');
+    const targetPath = SECTION_PATH_MAP[targetId] || '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
+
     if (targetId === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setActiveSection('home');
